@@ -30,6 +30,7 @@ public class RoadConstructor : MonoBehaviour
 
   Vector3[] tempVertices = new Vector3[4];
   int[] tempTriangles = new int[6];
+  Vector2[] tempUvs = new Vector2[4];
 
   [Button("ConstructRoad")]
   public void ConstructRoadFrom(SplineContainer splineContainer)
@@ -40,16 +41,12 @@ public class RoadConstructor : MonoBehaviour
     this.side1 = new();
     this.side2 = new();
     var mesh = new Mesh();
-    var vertices = new List<Vector3>();
-    var triangles = new List<int>();
     for (int i = 0; i < splineContainer.Splines.Count; i++) {
       this.CollectVertices(
         splineContainer: splineContainer,
         index: i);
     }
-    this.AddMeshData(vertices, triangles, splineContainer.Splines.Count);
-    mesh.vertices = vertices.ToArray();
-    mesh.triangles = triangles.ToArray();
+    this.AddMeshData(mesh, splineContainer.Splines.Count);
     this.meshFilter.mesh = mesh;
   }
 
@@ -100,8 +97,13 @@ public class RoadConstructor : MonoBehaviour
     }
   }
 
-  void AddMeshData(List<Vector3> vertices, List<int> triangles, int numberOfSplines)
+  void AddMeshData(Mesh mesh, int numberOfSplines)
   {
+    var vertices = new List<Vector3>();
+    var triangles = new List<int>();
+    var uvs = new List<Vector2>();
+    float uvOffset = 0f;
+    float distance = 0f;
     for (int splineIndex = 0; splineIndex < numberOfSplines; splineIndex++) {
       int splineOffset = this.resolution * splineIndex + splineIndex;
       for (int j = 0; j < this.resolution; ++j) {
@@ -119,10 +121,26 @@ public class RoadConstructor : MonoBehaviour
         this.tempTriangles[5] = offset + 0;
         vertices.AddRange(this.tempVertices);
         triangles.AddRange(this.tempTriangles);
+        distance = Vector3.Distance(
+          this.tempVertices[0], this.tempVertices[2] 
+          ) / 4f;
+        this.tempUvs[0] = new Vector2(0, uvOffset);
+        this.tempUvs[1] = new Vector2(1, uvOffset);
+        this.tempUvs[2] = new Vector2(0, uvOffset + distance);
+        this.tempUvs[3] = new Vector2(1, uvOffset + distance);
+        uvOffset += distance;
+        uvs.AddRange(this.tempUvs);
       }
     }
-    vertices.AddRange(tempVertices);
-    triangles.AddRange(tempTriangles);
+    mesh.vertices = vertices.ToArray();
+    mesh.subMeshCount = numberOfSplines;
+    mesh.uv = uvs.ToArray();
+    int trianglesCount = this.resolution * 6;
+    var subTriangles = new int[trianglesCount];
+    for (int i = 0; i < numberOfSplines; i++) {
+      triangles.CopyTo(trianglesCount * i, subTriangles, 0, trianglesCount);
+      mesh.SetTriangles(subTriangles, i); 
+    }
   }
 
   void DrawVertices(List<Vector3> vertices)

@@ -1,6 +1,8 @@
 
 # Unity Imports Assets
 /[Aa]ssets/[Ii]mports
+# Unity Plugins
+/[Aa]ssets/[Pp]lugins
 
 # c-tag
 **/tags

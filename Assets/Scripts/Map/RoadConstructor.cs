@@ -11,11 +11,11 @@ public class RoadConstructor : MonoBehaviour
 {
 
   [SerializeField] [Range(10, 100)]
-  int resolution;
+  int resolution = 50;
   [SerializeField] [Range(0f, 3f)]
-  float width;
+  float width = 0.5f;
   [SerializeField] [Range(0f, 3f)]
-  float radius;
+  float radius = 0;
 
   float3 position;
   float3 tangent;
@@ -24,17 +24,37 @@ public class RoadConstructor : MonoBehaviour
   List<Vector3> side1;
   [ShowInInspector]
   List<Vector3> side2;
-
   [SerializeField]
+  Material roadMeterial;
+
   MeshFilter meshFilter;
+  MeshRenderer meshRenderer;
 
   Vector3[] tempVertices = new Vector3[4];
   int[] tempTriangles = new int[6];
   Vector2[] tempUvs = new Vector2[4];
 
+  void Init()
+  {
+    if (this.meshFilter == null) {
+      this.meshFilter = this.GetComponent<MeshFilter>();
+    }
+    if (this.meshFilter == null) {
+      this.meshFilter = this.gameObject.AddComponent<MeshFilter>();
+    }
+    if (this.meshRenderer == null) {
+      this.meshRenderer = this.GetComponent<MeshRenderer>();
+    }
+
+    if (this.meshRenderer == null) {
+      this.meshRenderer = this.gameObject.AddComponent<MeshRenderer>();
+    }
+  }
+
   [Button("ConstructRoad")]
   public void ConstructRoadFrom(SplineContainer splineContainer)
   {
+    this.Init();
     if (splineContainer == null) {
       splineContainer = this.GetComponent<SplineContainer>();
     }
@@ -46,8 +66,18 @@ public class RoadConstructor : MonoBehaviour
         splineContainer: splineContainer,
         index: i);
     }
+    this.AddMaterials(splineContainer.Splines.Count);
     this.AddMeshData(mesh, splineContainer.Splines.Count);
     this.meshFilter.mesh = mesh;
+  }
+
+  void AddMaterials(int count)
+  {
+    var materials = new List<Material>();
+    for (int i = 0; i < count; i++) {
+      materials.Add(this.roadMeterial); 
+    }
+    this.meshRenderer.SetMaterials(materials);
   }
 
   void CollectVertices(SplineContainer splineContainer, int index)

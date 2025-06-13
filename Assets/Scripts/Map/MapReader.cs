@@ -8,12 +8,16 @@ using Sirenix.OdinInspector;
 
 public class MapReader : _MonoBehaviour
 {
+  [SerializeField]
+  public OsmBounds Bounds { get; private set; }
+  [ShowInInspector] 
+  public Dictionary<ulong, OsmNode> Nodes { get; private set; } = new ();
+  [ShowInInspector] 
+  public List<OsmWay> Ways { get; private set; } = new ();
+  public Action OnFinishRead;
+
   [SerializeField] [FilePath(AbsolutePath = true, ParentFolder = "Assets/Data", Extensions = "xml")]
   string dataPath;
-  [ShowInInspector] 
-  Dictionary<ulong, OsmNode> nodes = new ();
-  [ShowInInspector] 
-  List<OsmWay> ways = new ();
   [SerializeField]
   (float min, float max) latitudeRange
   {
@@ -41,18 +45,16 @@ public class MapReader : _MonoBehaviour
   (float min, float max) _longitudeRange;
 
   [SerializeField]
-  OsmBounds bounds;
-  [SerializeField]
   bool drawWays;
   
   [Button("Clear data")]
   void ClearData()
   {
-    this.nodes.Clear();
-    this.ways.Clear();
+    this.Nodes.Clear();
+    this.Ways.Clear();
   }
 
-  [Button("Read Data File")]
+  [Button("Read data File")]
   void ReadDataFile()
   {
     var data = File.ReadAllText(this.dataPath);
@@ -60,13 +62,16 @@ public class MapReader : _MonoBehaviour
     xmlDoc.LoadXml(data);
     this.GetNodes(xmlDoc.SelectNodes("/osm/node"));
     this.GetWays(xmlDoc.SelectNodes("/osm/way"));
+    if (this.OnFinishRead != null) {
+      this.OnFinishRead.Invoke();
+    }
   }
 
   void GetNodes(XmlNodeList xmlNodeList)
   {
     foreach (XmlNode node in xmlNodeList) {
       var osmNode = new OsmNode(node); 
-      this.nodes[osmNode.ID] = osmNode;
+      this.Nodes[osmNode.ID] = osmNode;
     }
   }
 
@@ -74,40 +79,38 @@ public class MapReader : _MonoBehaviour
   {
     foreach (XmlNode node in xmlNodeList) {
       var osmWay = new OsmWay(node);
-      this.ways.Add(osmWay);
+      this.Ways.Add(osmWay);
     }
   }
 
   [Button("Draw ways")]
   void DrawWays()
   {
-    foreach (var way in this.ways) {
+    var center = new Vector3(
+      this.Bounds.Center.x,
+      0,
+      this.Bounds.Center.y
+      );
+    foreach (var way in this.Ways) {
+      Color color;
+      if (way.Building != null) {
+        color = Color.Lerp(
+          Color.yellow,
+          Color.red,
+          (float)way.Height / 20f
+          );
+      }
+      else {
+        color = way.IsBoundary ? Color.green: Color.blue;
+      }
       for (int i = 1; i < way.Nodes.Count ; i++) {
         var p1 = way.Nodes[i - 1];
         var p2 = way.Nodes[i];
-        Vector3 v1 = this.GetPosition(p1);
-        Vector3 v2 = this.GetPosition(p2);
-        Debug.DrawLine(v1, v2, Color.blue, 1.0f);
+        Vector3 v1 = p1.GetPositionFrom(center);
+        Vector3 v2 = p2.GetPositionFrom(center);
+        Debug.DrawLine(v1, v2, color, 1.0f);
       }  
     } 
-  }
-
-  Vector3 GetPosition(OsmNode node)
-  {
-    return (
-      new Vector3(
-        node.X - this.bounds.Center.x,
-        0, 
-        node.Y - this.bounds.Center.y));
-  }
-
-  Vector3 GetPosition(OsmWay.WayNode node)
-  {
-    return (
-      new Vector3(
-        node.X - this.bounds.Center.x,
-        0, 
-        node.Y - this.bounds.Center.y));
   }
 
   // Update is called once per frame
@@ -118,10 +121,10 @@ public class MapReader : _MonoBehaviour
     }
   }
 
-  [Button("Set Bounds")]
+  [Button("Set bounds")]
   void SetBounds()
   {
-    this.bounds = new OsmBounds(
+    this.Bounds = new OsmBounds(
       minLatitude: this.latitudeRange.min,
       maxLatitude: this.latitudeRange.max,
       minLongitude: this.longitudeRange.min,

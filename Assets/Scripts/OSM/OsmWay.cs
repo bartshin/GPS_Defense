@@ -8,6 +8,7 @@ namespace OSM
   [Serializable]
   public class OsmWay 
   {
+    const float BuildingOneLevelHeight = 3f;
     public enum HighwayType
     {
       Primary,
@@ -29,6 +30,15 @@ namespace OSM
       [SerializeField]
       public float Y { get; private set; }
 
+      public Vector3 GetPositionFrom(Vector3 center)
+      {
+        return (
+          new Vector3(
+            this.X - center.x,
+            center.y, 
+            this.Y - center.z));
+      }
+
       public WayNode(XmlNode xmlNode)
       {
         this.Ref = OsmUtility.GetAttribute<ulong>("ref", xmlNode.Attributes);
@@ -41,6 +51,10 @@ namespace OSM
     [SerializeField]
     public string Name { get; private set;  }
     [SerializeField]
+    public string Building { get; private set;  }
+    [SerializeField]
+    public float Height { get; private set; }
+    [SerializeField]
     public ulong ID { get; private set; }
     [SerializeField]
     public OsmBounds Bounds;
@@ -51,6 +65,23 @@ namespace OSM
     [SerializeField]
     public bool IsBoundary { get; private set; }
     public List<WayNode> Nodes;
+
+    public Vector2 CalcCenter()
+    {
+      if (this.Nodes.Count > 0) {
+        float totalX = 0f;
+        float totalY = 0f;
+        for (int i = 0; i < this.Nodes.Count; ++i) {
+          totalX += this.Nodes[i].X;
+          totalY += this.Nodes[i].Y;
+        }
+        var total = new Vector2(totalX, totalY);
+        return (total / (float)this.Nodes.Count);
+      }
+      else {
+        return (Vector2.zero);
+      }
+    }
 
     public OsmWay(XmlNode xmlNode)
     {
@@ -93,6 +124,19 @@ namespace OSM
           case "ref":
             if (int.TryParse(valueString, out int refValue)) {
               this.Ref = refValue;
+            }
+            break;
+          case "building":
+            this.Building = valueString;
+            break;
+          case "building:levels":
+             if (float.TryParse(valueString, out float buildingLevel)) {
+               this.Height = BuildingOneLevelHeight * buildingLevel;
+             }
+            break;
+          case "height":
+            if (float.TryParse(valueString, out float height)) {
+              this.Height = height;
             }
             break;
         }

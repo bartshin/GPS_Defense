@@ -30,6 +30,16 @@ namespace OSM
     [SerializeField]
     public float Y { get; private set; }
 
+    public Vector3 GetPositionFrom(Vector3 center)
+    {
+      return (
+        new Vector3(
+          this.X - center.x,
+          0, 
+          this.Y - center.y)
+        );
+    }
+
     public OsmNode(XmlNode xmlNode)
     {
       this.ID = OsmUtility.GetAttribute<ulong>("id", xmlNode.Attributes);  

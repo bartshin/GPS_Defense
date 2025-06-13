@@ -1,197 +1,169 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using Unity.Mathematics;
-using UnityEngine.Splines;    
-using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.Splines;
+using OSM;
 
-[ExecuteInEditMode()]
-public class RoadConstructor : MonoBehaviour
+public class RoadConstructor : _MonoBehaviour
 {
-
-  [SerializeField] [Range(10, 500)]
-  int resolution = 50;
-  [SerializeField] [Range(0f, 3f)]
-  float width = 0.5f;
-  [SerializeField] [Range(0f, 3f)]
-  float radius = 0;
-
-  float3 position;
-  float3 tangent;
-  float3 upVector;
-  [ShowInInspector]
-  List<Vector3> side1;
-  [ShowInInspector]
-  List<Vector3> side2;
   [SerializeField]
-  Material roadMeterial;
-
-  MeshFilter meshFilter;
-  MeshRenderer meshRenderer;
-
+  Material material;
+  [SerializeField] 
+  float height = 0.2f;
+  [SerializeField] [Range(0.1f, 3f)]
+  float width = 1f;
+  [SerializeField] [Range(1, 10)]
+  int resolutionMultiplier = 1;
   Vector3[] tempVertices = new Vector3[4];
-  int[] tempTriangles = new int[6];
   Vector2[] tempUvs = new Vector2[4];
+  int[] tempTriangles = new int[6];
+  float avoidZFighting = 0.001f;
+  float3 tempPosition;
+  float3 tempTangent;
+  float3 tempUpVector;
 
-  void Init()
+  public GameObject Construct(OsmWay way, Vector3 mapCenter)
   {
-    if (this.meshFilter == null) {
-      this.meshFilter = this.GetComponent<MeshFilter>();
-    }
-    if (this.meshFilter == null) {
-      this.meshFilter = this.gameObject.AddComponent<MeshFilter>();
-    }
-    if (this.meshRenderer == null) {
-      this.meshRenderer = this.GetComponent<MeshRenderer>();
-    }
-
-    if (this.meshRenderer == null) {
-      this.meshRenderer = this.gameObject.AddComponent<MeshRenderer>();
-    }
-  }
-
-  [Button("ConstructRoad")]
-  public void ConstructRoadFrom(SplineContainer splineContainer)
-  {
-    this.Init();
-    if (splineContainer == null) {
-      splineContainer = this.GetComponent<SplineContainer>();
-    }
-    this.side1 = new();
-    this.side2 = new();
+    var gameObject = new GameObject(way.Name);
+    var splineContainer = gameObject.AddComponent<SplineContainer>();
+    var meshFilter = gameObject.AddComponent<MeshFilter>();
+    var meshRenderer = gameObject.AddComponent<MeshRenderer>();
     var mesh = new Mesh();
-    for (int i = 0; i < splineContainer.Splines.Count; i++) {
-      this.CollectVertices(
-        splineContainer: splineContainer,
-        index: i);
-    }
-    this.AddMaterials(splineContainer.Splines.Count);
-    this.AddMeshData(mesh, splineContainer.Splines.Count);
-    this.meshFilter.mesh = mesh;
-  }
-
-  void AddMaterials(int count)
-  {
-    var materials = new List<Material>();
-    for (int i = 0; i < count; i++) {
-      materials.Add(this.roadMeterial); 
-    }
-    this.meshRenderer.SetMaterials(materials);
-  }
-
-  void CollectVertices(SplineContainer splineContainer, int index)
-  {
-    float step = 1f / (float)this.resolution;
-    Vector3 pos = Vector3.zero;
-    Vector3 foward = Vector3.zero;
-    Vector3 right;
-    for (int i = 0; i < this.resolution; ++i) {
-      float t = step * (float)i; 
-      this.SampleSpline(
-        splineContainer, index, t, ref pos, ref foward
-        );
-      right = Vector3.Cross(foward, this.upVector).normalized;
-      this.side1.Add(pos + right * this.width);
-      this.side2.Add(pos + right * this.width * -1);
-    }
-    right = Vector3.Cross(foward, this.upVector).normalized;
-    this.side1.Add(pos + right * this.width);
-    this.side2.Add(pos + right * this.width * -1);
-  }
-
-  void SampleSpline(SplineContainer splineContainer, int splineIndex, float t, ref Vector3 pos, ref Vector3 foward)
-  {
-    splineContainer.Evaluate(
-      splineIndex: splineIndex,
-      t: t,
-      position: out this.position,
-      tangent: out this.tangent,
-      out this.upVector
+    meshRenderer.material = this.material;
+    var spline = splineContainer.Splines.Count == 1 ?
+      splineContainer.Splines[0]:
+      splineContainer.AddSpline();
+    this.InitSpline(
+      spline: spline,
+      way: way,
+      mapCenter: mapCenter
       );
-    pos.Set(this.position.x, this.position.y, this.position.z);
-    foward.Set(this.tangent.x, this.tangent.y, this.tangent.z);
+    var (side1, side2) = this.CollectRoadVericies(
+      way: way,
+      splineContainer: splineContainer,
+      splineIndex: 0);
+    this.FillRoadMeshData(
+      mesh: mesh,
+      way: way,
+      side1: side1,
+      side2: side2
+      );
+    meshFilter.mesh = mesh;
+    this.height += this.avoidZFighting;
+    return (gameObject);
   }
 
-  void OnDrawGizmos()
+  void InitSpline(Spline spline, OsmWay way, Vector3 mapCenter)
   {
-    Handles.matrix = transform.localToWorldMatrix;
-    if (this.side1 != null) {
-      this.DrawVertices(this.side1);
+    var knots = new List<BezierKnot>(way.Nodes.Count);
+    for (int i = 0; i < way.Nodes.Count; ++i) {
+      var pos = new Vector3(
+        way.Nodes[i].X - mapCenter.x,
+        this.height - mapCenter.y,
+        way.Nodes[i].Y - mapCenter.z
+        );
+      knots.Add(new BezierKnot(pos));
     }
-    if (this.side2 != null) {
-      this.DrawVertices(this.side2);
-    }
+    spline.Knots = knots;
   }
 
-  void AddMeshData(Mesh mesh, int numberOfSplines)
+  void FillRoadMeshData(Mesh mesh, OsmWay way, List<Vector3> side1, List<Vector3>side2)
   {
     var vertices = new List<Vector3>();
     var triangles = new List<int>();
     var uvs = new List<Vector2>();
     float uvOffset = 0f;
     float distance = 0f;
-    int numberOfVertices = this.resolution;
-    for (int splineIndex = 0; splineIndex < numberOfSplines; splineIndex++) {
-      int splineOffset = numberOfVertices * splineIndex + splineIndex;
-      for (int j = 0; j < numberOfVertices; ++j) {
-        int vertIndex = splineOffset + j;
-        this.tempVertices[0] = this.side1[vertIndex]; 
-        this.tempVertices[1] = this.side2[vertIndex]; 
-        this.tempVertices[2] = this.side1[vertIndex + 1];
-        this.tempVertices[3] = this.side2[vertIndex + 1];
-        int offset = 4 * (numberOfVertices * splineIndex + j);
-        this.tempTriangles[0] = offset + 0;
-        this.tempTriangles[1] = offset + 2;
-        this.tempTriangles[2] = offset + 3;
-        this.tempTriangles[3] = offset + 3;
-        this.tempTriangles[4] = offset + 1;
-        this.tempTriangles[5] = offset + 0;
-        vertices.AddRange(this.tempVertices);
-        triangles.AddRange(this.tempTriangles);
-        distance = Vector3.Distance(
-          this.tempVertices[0], this.tempVertices[2] 
-          ) / 4f;
-        this.tempUvs[0] = new Vector2(0, uvOffset);
-        this.tempUvs[1] = new Vector2(1, uvOffset);
-        this.tempUvs[2] = new Vector2(0, uvOffset + distance);
-        this.tempUvs[3] = new Vector2(1, uvOffset + distance);
-        uvOffset += distance;
-        uvs.AddRange(this.tempUvs);
-      }
+    int offset;
+    int count = side1.Count - 1;
+    for (int j = 0; j < count; ++j) {
+      this.tempVertices[0] = side1[j]; 
+      this.tempVertices[1] = side2[j]; 
+      this.tempVertices[2] = side1[j + 1];
+      this.tempVertices[3] = side2[j + 1];
+      offset = 4 * (j);
+      this.tempTriangles[0] = offset + 0;
+      this.tempTriangles[1] = offset + 2;
+      this.tempTriangles[2] = offset + 3;
+      this.tempTriangles[3] = offset + 3;
+      this.tempTriangles[4] = offset + 1;
+      this.tempTriangles[5] = offset + 0;
+      vertices.AddRange(this.tempVertices);
+      triangles.AddRange(this.tempTriangles);
+      distance = Vector3.Distance(
+        this.tempVertices[0], this.tempVertices[2] 
+        ) / 4f;
+      this.tempUvs[0] = new Vector2(0, uvOffset);
+      this.tempUvs[1] = new Vector2(1, uvOffset);
+      this.tempUvs[2] = new Vector2(0, uvOffset + distance);
+      this.tempUvs[3] = new Vector2(1, uvOffset + distance);
+      uvOffset += distance;
+      uvs.AddRange(this.tempUvs);
     }
     mesh.vertices = vertices.ToArray();
-    mesh.subMeshCount = numberOfSplines;
     mesh.uv = uvs.ToArray();
-    int trianglesCount = numberOfVertices * 6;
-    var subTriangles = new int[trianglesCount];
-    for (int i = 0; i < numberOfSplines; i++) {
-      triangles.CopyTo(trianglesCount * i, subTriangles, 0, trianglesCount);
-      mesh.SetTriangles(subTriangles, i); 
-    }
+    mesh.triangles = triangles.ToArray();
   }
 
-  void DrawVertices(List<Vector3> vertices)
+  (List<Vector3>, List<Vector3>) CollectRoadVericies(OsmWay way, SplineContainer splineContainer, int splineIndex)
   {
-    if (this.radius == 0) {
-      return;
-    }
-    for (int i = 0; i < vertices.Count; i++) {
-      Handles.SphereHandleCap(
-        0, vertices[i], Quaternion.identity, this.radius, EventType.Repaint
+    var verticesSide1 = new List<Vector3>();
+    var verticesSide2 = new List<Vector3>();
+    int count = splineContainer.Splines[splineIndex].Count * this.resolutionMultiplier;
+    float step = 1f / (float)count;
+    Vector3 right = Vector3.zero;
+    Vector3 pos;
+    Vector3 foward;
+    (pos, foward) = this.SampleSpline(
+      splineContainer: splineContainer,
+      splineIndex: splineIndex,
+      t: 0
+      );
+    foward = new Vector3(
+      way.Nodes[1].X - way.Nodes[0].X,
+      0,
+      way.Nodes[1].Y - way.Nodes[0].Y
+      ).normalized;
+    right = Vector3.Cross(foward, this.tempUpVector).normalized;
+    verticesSide1.Add(pos + right * this.width);
+    verticesSide2.Add(pos - right * this.width);
+    for (int i = 1; i < count - 1; ++i) {
+      float t = step * (float)i;
+      (pos, foward) = this.SampleSpline(
+        splineContainer: splineContainer,
+        splineIndex: splineIndex,
+        t: t
         );
+      right = Vector3.Cross(foward, this.tempUpVector).normalized;
+      verticesSide1.Add(pos + right * this.width);
+      verticesSide2.Add(pos - right * this.width);
     }
+    (pos, _) = this.SampleSpline(
+      splineContainer: splineContainer,
+      splineIndex: splineIndex,
+      t: 1
+      );
+
+    right = Vector3.Cross(foward, this.tempUpVector).normalized;
+    verticesSide1.Add(pos + right * this.width);
+    verticesSide2.Add(pos - right * this.width);
+    return (verticesSide1, verticesSide2);
   }
 
-  // Start is called before the first frame update
-  void Start()
+  (Vector3 pos, Vector3 foward) SampleSpline(SplineContainer splineContainer, int splineIndex, float t)
   {
-
+    splineContainer.Evaluate(
+      splineIndex: splineIndex,
+      t: t,
+      position: out this.tempPosition,
+      tangent: out this.tempTangent,
+      out this.tempUpVector
+      );
+    return (
+      new Vector3(this.tempPosition.x, this.tempPosition.y, this.tempPosition.z),
+      new Vector3(this.tempTangent.x, this.tempTangent.y, this.tempTangent.z)
+      );
   }
 
-  // Update is called once per frame
-  void Update()
-  {
-
-  }
 }

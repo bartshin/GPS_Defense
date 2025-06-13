@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Road
@@ -27,6 +26,38 @@ namespace Road
     {
       return ($"(lat: {this.Lat}, lng: {this.Lng})");
     }
+  }
+
+  public struct RoadBounds
+  {
+     public Coordinates Min;
+     public Coordinates Max;
+
+     public bool IsContain(RoadBounds bounds)
+     {
+       if (this.Min.Lat > bounds.Min.Lat ||
+         this.Min.Lng > bounds.Min.Lng) {
+         return (false);
+       }
+       if (this.Max.Lat < bounds.Max.Lat ||
+         this.Max.Lng < bounds.Max.Lng) {
+         return (false);
+       }
+       return (true);
+     }
+  }
+
+  public struct IdentifiableCoord
+  {
+    public float Lat;
+    public float Lng;
+    public int nodeId;
+
+    public override string ToString()
+    {
+      return ($"id: {this.nodeId} (lat: {this.Lat}, lng: {this.Lng})");
+    }
+
   }
 
   public enum RoadType 
@@ -113,6 +144,7 @@ namespace Road
       public int id;
       public Bounds bounds;
       public Geometry[] geometry;
+      public int[] nodes;
       public Tags tags;
       public override string ToString()
       {

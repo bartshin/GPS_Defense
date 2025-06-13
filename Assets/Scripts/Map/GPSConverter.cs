@@ -15,16 +15,18 @@ public class GPSConverter: Singleton<GPSConverter>
     this.ZoomLevel = zoomLevel;
   }
   
-  public Vector2[] Convert(IList<Coordinates> coordinates)
+  public Vector2[] Convert(ICollection<IdentifiableCoord> coordinates)
   {
     var positions = new Vector2[coordinates.Count];
-    for (int i = 0; i < positions.Length; i++) {
-      positions[i] = this.Convert(coordinates[i]); 
+    int i = 0;
+    foreach (var coords in coordinates) {
+      positions[i] = this.Convert(coords);
+      i++;
     }
     return (positions);
   }
 
-  public Vector2 Convert(Coordinates coordinate)
+  public Vector2 Convert(IdentifiableCoord coordinate)
   {
     return (
       new Vector2(

@@ -12,11 +12,11 @@ public class EditorFontSize : EditorWindow
   // launch , on script assembly reload and on application enter / exit play mode 
 
   public static bool RESIZE_ON_LAUNCH = true;
-  public static int DEFAULT_GLOBAL_FONT_SIZE = 7;
+  public static int DEFAULT_GLOBAL_FONT_SIZE = 10;
 
   [InitializeOnLoadMethod] static void DefaultSize()
   {
-    if( ! RESIZE_ON_LAUNCH || DEFAULT_GLOBAL_FONT_SIZE <= 10 ) return;
+    if( ! RESIZE_ON_LAUNCH || DEFAULT_GLOBAL_FONT_SIZE <= 6 ) return;
     var w = GetWindow<EditorFontSize>();
     w.GUICallback = () => {
       w.Resize( DEFAULT_GLOBAL_FONT_SIZE - 10 ) ;

@@ -41,19 +41,22 @@ public class RoadDataLoader : MonoBehaviour
     GPSConverter.Shared.Init(this.center, this.zoomLevel);
     var gameObject = new GameObject("Road");
     var splineContainer = gameObject.AddComponent<SplineContainer>();
-
     for (int i = 0; i < this.roadData.Count; i++) {
-      var positions = GPSConverter.Shared.Convert(this.roadData[i].Path); 
-      var spline = splineContainer.AddSpline();
-      var knots = new BezierKnot[positions.Length];
-      for (int j = 0; j < positions.Length; ++j) {
-        knots[j]  = new BezierKnot(new Vector3(
-            positions[j].x,
-            this.roadHeight,
-            positions[j].y
-            ));
+      var roadHeight = this.roadHeight;
+      foreach (var road in this.roadData[i].AllRoad) {
+        var positions = GPSConverter.Shared.Convert(road); 
+        var spline = splineContainer.AddSpline();
+        var knots = new BezierKnot[positions.Length];
+        for (int j = 0; j < positions.Length; ++j) {
+          knots[j]  = new BezierKnot(new Vector3(
+              positions[j].x,
+              roadHeight,
+              positions[j].y
+              ));
+          roadHeight += 0.001f;
+          spline.Knots = knots;
+        }
       }
-      spline.Knots = knots;
     }
     var roadConstructor = gameObject.AddComponent<RoadConstructor>();
     return (gameObject);

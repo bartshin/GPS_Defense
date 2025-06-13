@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -10,7 +10,7 @@ using Sirenix.OdinInspector;
 public class RoadConstructor : MonoBehaviour
 {
 
-  [SerializeField] [Range(10, 100)]
+  [SerializeField] [Range(10, 500)]
   int resolution = 50;
   [SerializeField] [Range(0f, 3f)]
   float width = 0.5f;
@@ -95,9 +95,6 @@ public class RoadConstructor : MonoBehaviour
       this.side1.Add(pos + right * this.width);
       this.side2.Add(pos + right * this.width * -1);
     }
-    this.SampleSpline(
-      splineContainer, index, 1, ref pos, ref foward
-      );
     right = Vector3.Cross(foward, this.upVector).normalized;
     this.side1.Add(pos + right * this.width);
     this.side2.Add(pos + right * this.width * -1);
@@ -134,15 +131,16 @@ public class RoadConstructor : MonoBehaviour
     var uvs = new List<Vector2>();
     float uvOffset = 0f;
     float distance = 0f;
+    int numberOfVertices = this.resolution;
     for (int splineIndex = 0; splineIndex < numberOfSplines; splineIndex++) {
-      int splineOffset = this.resolution * splineIndex + splineIndex;
-      for (int j = 0; j < this.resolution; ++j) {
+      int splineOffset = numberOfVertices * splineIndex + splineIndex;
+      for (int j = 0; j < numberOfVertices; ++j) {
         int vertIndex = splineOffset + j;
         this.tempVertices[0] = this.side1[vertIndex]; 
         this.tempVertices[1] = this.side2[vertIndex]; 
         this.tempVertices[2] = this.side1[vertIndex + 1];
         this.tempVertices[3] = this.side2[vertIndex + 1];
-        int offset = 4 * (this.resolution * splineIndex + j);
+        int offset = 4 * (numberOfVertices * splineIndex + j);
         this.tempTriangles[0] = offset + 0;
         this.tempTriangles[1] = offset + 2;
         this.tempTriangles[2] = offset + 3;
@@ -165,7 +163,7 @@ public class RoadConstructor : MonoBehaviour
     mesh.vertices = vertices.ToArray();
     mesh.subMeshCount = numberOfSplines;
     mesh.uv = uvs.ToArray();
-    int trianglesCount = this.resolution * 6;
+    int trianglesCount = numberOfVertices * 6;
     var subTriangles = new int[trianglesCount];
     for (int i = 0; i < numberOfSplines; i++) {
       triangles.CopyTo(trianglesCount * i, subTriangles, 0, trianglesCount);

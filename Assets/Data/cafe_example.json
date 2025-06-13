@@ -1,0 +1,1414 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.4 2390de5a",
+  "osm3s": {
+    "timestamp_osm_base": "",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 4312128698,
+  "lat": 37.4864688,
+  "lon": 126.9825040,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "스타벅스",
+    "brand:en": "Starbucks",
+    "brand:ko": "스타벅스",
+    "brand:wikidata": "Q37158",
+    "brand:wikipedia": "ko:스타벅스",
+    "check_date": "2024-01-03",
+    "cuisine": "coffee_shop",
+    "int_name": "Starbucks",
+    "name": "스타벅스",
+    "name:de": "Starbucks",
+    "name:en": "Starbucks",
+    "name:ja": "スターバックス",
+    "name:ko": "스타벅스",
+    "name:ru": "Старбакс",
+    "name:zh": "星巴克",
+    "operator": "(주)스타벅스커피 코리아",
+    "payment:american_express": "yes",
+    "payment:coins": "yes",
+    "payment:diners_club": "yes",
+    "payment:discover_card": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "takeaway": "yes",
+    "website": "http://www.istarbucks.co.kr/index.do"
+  }
+},
+{
+  "type": "node",
+  "id": 4312130395,
+  "lat": 37.4773048,
+  "lon": 126.9820368,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "스타벅스",
+    "brand:en": "Starbucks",
+    "brand:ko": "스타벅스",
+    "brand:wikidata": "Q37158",
+    "cuisine": "coffee_shop",
+    "int_name": "Starbucks",
+    "name": "스타벅스",
+    "name:de": "Starbucks",
+    "name:en": "Starbucks",
+    "name:ja": "スターバックス",
+    "name:ko": "스타벅스",
+    "name:ru": "Старбакс",
+    "name:zh": "星巴克",
+    "operator": "(주)스타벅스커피 코리아",
+    "payment:american_express": "yes",
+    "payment:coins": "yes",
+    "payment:diners_club": "yes",
+    "payment:discover_card": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "takeaway": "yes",
+    "website": "http://www.istarbucks.co.kr/index.do"
+  }
+},
+{
+  "type": "node",
+  "id": 4312151389,
+  "lat": 37.4784099,
+  "lon": 126.9815194,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "스타벅스",
+    "brand:en": "Starbucks",
+    "brand:ko": "스타벅스",
+    "brand:wikidata": "Q37158",
+    "cuisine": "coffee_shop",
+    "int_name": "Starbucks",
+    "name": "스타벅스",
+    "name:de": "Starbucks",
+    "name:en": "Starbucks",
+    "name:ja": "スターバックス",
+    "name:ko": "스타벅스",
+    "name:ru": "Старбакс",
+    "name:zh": "星巴克",
+    "operator": "(주)스타벅스커피 코리아",
+    "payment:american_express": "yes",
+    "payment:coins": "yes",
+    "payment:diners_club": "yes",
+    "payment:discover_card": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "takeaway": "yes",
+    "website": "http://www.istarbucks.co.kr/index.do"
+  }
+},
+{
+  "type": "node",
+  "id": 4631163947,
+  "lat": 37.4838921,
+  "lon": 126.9731199,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "16",
+    "addr:postcode": "07004",
+    "addr:street": "사당로17가길",
+    "amenity": "cafe",
+    "brand": "카페베네",
+    "brand:en": "Caffe Bene",
+    "brand:wikidata": "Q5017149",
+    "cuisine": "coffee_shop",
+    "internet_access": "wlan",
+    "name": "카페베네",
+    "name:en": "Caffe Bene",
+    "name:ja": "カフェベネ",
+    "name:ko": "카페베네",
+    "operator": "Caffe Bene",
+    "outdoor_seating": "yes",
+    "payment:american_express": "yes",
+    "payment:coins": "yes",
+    "payment:diners_club": "yes",
+    "payment:discover_card": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "smoking": "no",
+    "website": "http://www.caffebene.co.kr/"
+  }
+},
+{
+  "type": "node",
+  "id": 4631164236,
+  "lat": 37.4837984,
+  "lon": 126.9733721,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "16",
+    "addr:postcode": "07004",
+    "addr:street": "사당로17가길",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "internet_access": "wlan",
+    "name": "이디야",
+    "name:en": "Ediya"
+  }
+},
+{
+  "type": "node",
+  "id": 4660165191,
+  "lat": 37.4761494,
+  "lon": 126.9651315,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "관악구",
+    "addr:housenumber": "1948",
+    "addr:street": "남부순환로",
+    "amenity": "cafe",
+    "branch": "낙성대DT점",
+    "brand": "스타벅스",
+    "brand:en": "Starbucks",
+    "brand:ko": "스타벅스",
+    "brand:wikidata": "Q37158",
+    "cuisine": "coffee_shop",
+    "int_name": "Starbucks",
+    "internet_access": "wlan",
+    "internet_access:fee": "yes",
+    "name": "스타벅스",
+    "name:de": "Starbucks",
+    "name:en": "Starbucks",
+    "name:ja": "スターバックス",
+    "name:ko": "스타벅스",
+    "name:ru": "Старбакс",
+    "name:zh": "星巴克",
+    "note": "Drive-Thru available",
+    "operator": "(주)스타벅스커피 코리아",
+    "payment:american_express": "yes",
+    "payment:coins": "yes",
+    "payment:diners_club": "yes",
+    "payment:discover_card": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "phone": "+82 02 872 3249",
+    "smoking": "no",
+    "takeaway": "yes",
+    "website": "http://www.istarbucks.co.kr/index.do"
+  }
+},
+{
+  "type": "node",
+  "id": 4772803917,
+  "lat": 37.4870741,
+  "lon": 126.9810485,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "Sulbing",
+    "brand:en": "Sulbing",
+    "brand:ko": "설빙",
+    "brand:wikidata": "Q18156373",
+    "cuisine": "dessert",
+    "name": "Sulbing",
+    "name:en": "Sulbing",
+    "name:ko": "설빙",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5091248060,
+  "lat": 37.4803219,
+  "lon": 126.9933909,
+  "tags": {
+    "amenity": "cafe",
+    "name": "카페무스토"
+  }
+},
+{
+  "type": "node",
+  "id": 5339942321,
+  "lat": 37.4919824,
+  "lon": 126.9907758,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "스타벅스",
+    "brand:en": "Starbucks",
+    "brand:ko": "스타벅스",
+    "brand:wikidata": "Q37158",
+    "brand:wikipedia": "ko:스타벅스",
+    "cuisine": "coffee_shop",
+    "int_name": "Starbucks",
+    "internet_access": "wlan",
+    "name": "스타벅스",
+    "name:en": "Starbucks",
+    "name:ja": "スターバックス",
+    "name:ko": "스타벅스",
+    "name:ru": "Старбакс",
+    "name:zh": "星巴克",
+    "payment:american_express": "yes",
+    "payment:cash": "yes",
+    "payment:coins": "yes",
+    "payment:diners_club": "yes",
+    "payment:discover_card": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "smoking": "no",
+    "takeaway": "yes",
+    "website": "http://www.istarbucks.co.kr/index.do"
+  }
+},
+{
+  "type": "node",
+  "id": 5489003022,
+  "lat": 37.4900373,
+  "lon": 126.9924007,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "184",
+    "addr:street": "방배로",
+    "amenity": "cafe",
+    "brand": "스타벅스",
+    "brand:en": "Starbucks",
+    "brand:ko": "스타벅스",
+    "brand:wikidata": "Q37158",
+    "brand:wikipedia": "ko:스타벅스",
+    "cuisine": "coffee_shop",
+    "internet_access": "wlan",
+    "name": "스타벅스",
+    "name:en": "Starbucks",
+    "name:ja": "スターバックス",
+    "name:ko": "스타벅스",
+    "opening_hours": "Mo-Su 07:00-23:00",
+    "payment:american_express": "yes",
+    "payment:cash": "yes",
+    "payment:coins": "yes",
+    "payment:diners_club": "yes",
+    "payment:discover_card": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "smoking": "no",
+    "takeaway": "yes",
+    "website": "http://www.istarbucks.co.kr/index.do"
+  }
+},
+{
+  "type": "node",
+  "id": 5870861442,
+  "lat": 37.4800640,
+  "lon": 126.9833878,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "16-12",
+    "addr:street": "방배천로8길",
+    "amenity": "cafe",
+    "name": "카페 투앤드모멘트",
+    "opening_hours": "Mo-Th 11:30~22:30 Fr-Sa 11:30~23:00 Su 12:00~22:30"
+  }
+},
+{
+  "type": "node",
+  "id": 5988213170,
+  "lat": 37.4761126,
+  "lon": 126.9810415,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "스타벅스",
+    "brand:en": "Starbucks",
+    "brand:ko": "스타벅스",
+    "brand:wikidata": "Q37158",
+    "cuisine": "coffee_shop",
+    "int_name": "Starbucks",
+    "name": "스타벅스",
+    "name:de": "Starbucks",
+    "name:en": "Starbucks",
+    "name:ja": "スターバックス",
+    "name:ko": "스타벅스",
+    "name:ru": "Старбакс",
+    "name:zh": "星巴克",
+    "operator": "(주)스타벅스커피 코리아",
+    "payment:american_express": "yes",
+    "payment:coins": "yes",
+    "payment:diners_club": "yes",
+    "payment:discover_card": "yes",
+    "payment:jcb": "yes",
+    "payment:mastercard": "yes",
+    "payment:notes": "yes",
+    "payment:unionpay": "yes",
+    "payment:visa": "yes",
+    "smoking": "no",
+    "takeaway": "yes",
+    "website": "http://www.istarbucks.co.kr/index.do"
+  }
+},
+{
+  "type": "node",
+  "id": 5988213173,
+  "lat": 37.4834737,
+  "lon": 126.9743636,
+  "tags": {
+    "amenity": "cafe",
+    "name": "빽다방",
+    "name:en": "BBak's Coffee",
+    "name:ko": "빽다방"
+  }
+},
+{
+  "type": "node",
+  "id": 8323774205,
+  "lat": 37.4896093,
+  "lon": 126.9709093,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "9",
+    "addr:postcode": "07002",
+    "addr:street": "사당로23바길",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop",
+    "level": "2",
+    "name": "커피소사이어티"
+  }
+},
+{
+  "type": "node",
+  "id": 8556604219,
+  "lat": 37.4771822,
+  "lon": 126.9796285,
+  "tags": {
+    "amenity": "cafe",
+    "name:en": "Penny coffeeroasters"
+  }
+},
+{
+  "type": "node",
+  "id": 8730254453,
+  "lat": 37.4865012,
+  "lon": 126.9941652,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "141",
+    "addr:postcode": "06672",
+    "addr:street": "방배로",
+    "amenity": "cafe",
+    "brand": "메가MGC커피",
+    "brand:en": "Mega Coffee",
+    "brand:ko": "메가커피",
+    "brand:wikidata": "Q120998343",
+    "cuisine": "coffee_shop",
+    "name": "메가MGC커피",
+    "name:en": "Mega Coffee",
+    "name:ko": "메가커피",
+    "opening_hours": "Mo-Fr 07:30-22:30",
+    "phone": "0507-1363-1005",
+    "short_name": "MGC",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 8730254457,
+  "lat": 37.4874504,
+  "lon": 126.9940838,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "공차",
+    "brand:en": "Gong Cha",
+    "brand:ko": "공차",
+    "brand:wikidata": "Q5581670",
+    "brand:wikipedia": "ko:공차",
+    "brand:zh": "貢茶",
+    "cuisine": "bubble_tea",
+    "int_name": "Gong Cha",
+    "name": "공차",
+    "name:en": "Gong Cha",
+    "name:ko": "공차",
+    "name:zh": "貢茶",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 9284901253,
+  "lat": 37.4752302,
+  "lon": 126.9805758,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "관악구",
+    "addr:housenumber": "32",
+    "addr:postcode": "08807",
+    "addr:street": "승방4길",
+    "amenity": "cafe",
+    "cuisine": "coffee_shop;sandwich;korean",
+    "internet_access": "wlan",
+    "internet_access:fee": "no",
+    "internet_access:ssid": "nactanalda",
+    "name": "낙타날다",
+    "opening_hours": "Mo-Su 10:30-24:00",
+    "outdoor_seating": "yes",
+    "phone": "+821073247926",
+    "power": "사당역카페",
+    "source": "카페",
+    "website": "https://www.instagram.com/nactanalda/"
+  }
+},
+{
+  "type": "node",
+  "id": 9747553425,
+  "lat": 37.4781265,
+  "lon": 126.9882284,
+  "tags": {
+    "amenity": "cafe",
+    "name": "Autocafe coffee"
+  }
+},
+{
+  "type": "node",
+  "id": 9747780739,
+  "lat": 37.4774657,
+  "lon": 126.9872905,
+  "tags": {
+    "amenity": "cafe",
+    "check_date": "2022-05-31",
+    "name:ko": "본죽&비빔밥 cafe",
+    "phone": "3487-6233"
+  }
+},
+{
+  "type": "node",
+  "id": 9747780741,
+  "lat": 37.4773771,
+  "lon": 126.9871454,
+  "tags": {
+    "amenity": "cafe",
+    "check_date": "2022-05-17",
+    "name:ko": "영도커피"
+  }
+},
+{
+  "type": "node",
+  "id": 9767327029,
+  "lat": 37.4767288,
+  "lon": 126.9832007,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "Tom N Toms",
+    "brand:en": "Tom N Toms",
+    "brand:ko": "탐앤탐스",
+    "brand:wikidata": "Q18142418",
+    "cuisine": "coffee_shop;pretzel;smoothie;tea;bread",
+    "name": "Tom N Toms",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 10065223778,
+  "lat": 37.4930129,
+  "lon": 126.9905309,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "75",
+    "addr:postcode": "06584",
+    "addr:street": "동광로",
+    "amenity": "cafe",
+    "check_date": "2024-01-10",
+    "cuisine": "coffee_shop",
+    "internet_access": "wlan",
+    "internet_access:fee": "customers",
+    "internet_access:ssid": "Megacoffee",
+    "name": "메가커피",
+    "name:en": "Mega Coffee"
+  }
+},
+{
+  "type": "node",
+  "id": 11391397335,
+  "lat": 37.4744824,
+  "lon": 126.9813836,
+  "tags": {
+    "amenity": "cafe",
+    "level": "2",
+    "name": "와우카페",
+    "website": "http://www.wowcoffee.org/"
+  }
+},
+{
+  "type": "node",
+  "id": 11481526936,
+  "lat": 37.4895469,
+  "lon": 126.9874157,
+  "tags": {
+    "amenity": "cafe",
+    "check_date": "2024-01-03",
+    "cuisine": "dessert",
+    "name": "Dessert 39"
+  }
+},
+{
+  "type": "node",
+  "id": 11491195243,
+  "lat": 37.4826660,
+  "lon": 126.9821466,
+  "tags": {
+    "amenity": "cafe",
+    "brand": "빽다방",
+    "brand:en": "Paik's Coffee",
+    "brand:ko": "빽다방",
+    "brand:wikidata": "Q55730575",
+    "check_date": "2024-01-05",
+    "cuisine": "coffee_shop",
+    "name": "빽다방",
+    "name:en": "Paik's Coffee",
+    "name:ko": "빽다방",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 11527365667,
+  "lat": 37.4919954,
+  "lon": 126.9869918,
+  "tags": {
+    "amenity": "cafe",
+    "check_date": "2024-01-18",
+    "name": "With Us Cafe"
+  }
+},
+{
+  "type": "node",
+  "id": 11865886960,
+  "lat": 37.4843749,
+  "lon": 126.9960130,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "114",
+    "addr:postcode": "06665",
+    "addr:street": "방배로",
+    "amenity": "cafe",
+    "branch": "방배다이치빌딩점",
+    "brand": "스타벅스",
+    "brand:en": "Starbucks",
+    "brand:ko": "스타벅스",
+    "brand:wikidata": "Q37158",
+    "cuisine": "coffee_shop",
+    "name": "스타벅스",
+    "name:en": "Starbucks",
+    "name:ko": "스타벅스",
+    "opening_hours": "Mo-Fr 07:00-22:00, Sa-Su 08:00-22:00",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12074365465,
+  "lat": 37.4818404,
+  "lon": 126.9804109,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "12",
+    "addr:street": "동작대로13길",
+    "amenity": "cafe",
+    "name": "땡스커피"
+  }
+},
+{
+  "type": "node",
+  "id": 12074370324,
+  "lat": 37.4781274,
+  "lon": 126.9803508,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "150",
+    "addr:street": "사당로30길",
+    "amenity": "cafe",
+    "name": "오케이(O.K)"
+  }
+},
+{
+  "type": "node",
+  "id": 12074406358,
+  "lat": 37.4827025,
+  "lon": 126.9802534,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "24-9",
+    "addr:street": "동작대로15길",
+    "amenity": "cafe",
+    "name": "딴짓 제과점"
+  }
+},
+{
+  "type": "node",
+  "id": 12074417028,
+  "lat": 37.4886724,
+  "lon": 126.9800710,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "8",
+    "addr:street": "동작대로29다길",
+    "amenity": "cafe",
+    "name": "크로와쿠"
+  }
+},
+{
+  "type": "node",
+  "id": 12074417857,
+  "lat": 37.4884815,
+  "lon": 126.9790507,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "53",
+    "addr:postcode": "07008",
+    "addr:street": "동작대로29길",
+    "addr:unit": "2층",
+    "amenity": "cafe",
+    "name": "이수살롱"
+  }
+},
+{
+  "type": "node",
+  "id": 12074424385,
+  "lat": 37.4805989,
+  "lon": 126.9791143,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "43",
+    "addr:street": "동작대로9길",
+    "amenity": "cafe",
+    "name": "머치커피(muchcoffee)"
+  }
+},
+{
+  "type": "node",
+  "id": 12074441591,
+  "lat": 37.4876286,
+  "lon": 126.9808656,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "20",
+    "addr:postcode": "07008",
+    "addr:street": "동작대로27길",
+    "addr:unit": "1층",
+    "amenity": "cafe",
+    "name": "메가커피 이수태평점"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553294,
+  "lat": 37.4917200,
+  "lon": 126.9918800,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "93",
+    "addr:street": "서초대로25길",
+    "amenity": "cafe",
+    "name": "쌍떼"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553305,
+  "lat": 37.4910960,
+  "lon": 126.9918820,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "196",
+    "addr:street": "방배로",
+    "amenity": "cafe",
+    "name": "SEE U BEAN(씨 유 빈)"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553334,
+  "lat": 37.4896160,
+  "lon": 126.9939760,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "37",
+    "addr:street": "서초대로27길",
+    "amenity": "cafe",
+    "name": "delight(딜라이트)"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553350,
+  "lat": 37.4883230,
+  "lon": 126.9947470,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "115",
+    "addr:street": "서초대로",
+    "amenity": "cafe",
+    "name": "아뜨리에 파젠다(Atelier FAZENDA)"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553351,
+  "lat": 37.4883060,
+  "lon": 126.9882100,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "3",
+    "addr:street": "방배중앙로15길",
+    "amenity": "cafe",
+    "name": "Y Coffee Roasters(와이커피로스터스)"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553360,
+  "lat": 37.4876340,
+  "lon": 126.9855900,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "132",
+    "addr:street": "방배천로",
+    "amenity": "cafe",
+    "name": "책 그리고"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553361,
+  "lat": 37.4875860,
+  "lon": 126.9828610,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "36",
+    "addr:street": "동광로12가길",
+    "amenity": "cafe",
+    "name": "카페 유(cafe U)"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553403,
+  "lat": 37.4853640,
+  "lon": 126.9955150,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "126",
+    "addr:street": "방배로",
+    "amenity": "cafe",
+    "name": "비엔나커피하우스 방배점"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553424,
+  "lat": 37.4838726,
+  "lon": 126.9950680,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "63",
+    "addr:street": "효령로31길",
+    "amenity": "cafe",
+    "name": "아토즈(A to Z)"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553430,
+  "lat": 37.4832770,
+  "lon": 126.9960890,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "103",
+    "addr:street": "방배로",
+    "amenity": "cafe",
+    "name": "폴 바셋 방배역점"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553456,
+  "lat": 37.4813560,
+  "lon": 126.9988790,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "4",
+    "addr:street": "효령로34길",
+    "amenity": "cafe",
+    "name": "카멜롯 베이크"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553467,
+  "lat": 37.4794790,
+  "lon": 126.9828540,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "3-4",
+    "addr:street": "방배천로6길",
+    "amenity": "cafe",
+    "name": "오우아(OH WOAH)"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553475,
+  "lat": 37.4785060,
+  "lon": 126.9837880,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "33",
+    "addr:street": "방배천로2안길",
+    "amenity": "cafe",
+    "name": "파스타달리"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553477,
+  "lat": 37.4782250,
+  "lon": 126.9820810,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "20",
+    "addr:street": "동작대로",
+    "amenity": "cafe",
+    "name": "바나프레소 사당역점"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553516,
+  "lat": 37.4745420,
+  "lon": 126.9930940,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "128",
+    "addr:street": "효령로2길",
+    "amenity": "cafe",
+    "name": "오십사계단커피"
+  }
+},
+{
+  "type": "node",
+  "id": 12076553517,
+  "lat": 37.4735220,
+  "lon": 126.9837610,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "12",
+    "addr:street": "방배선행길",
+    "amenity": "cafe",
+    "name": "앤스"
+  }
+},
+{
+  "type": "node",
+  "id": 12079311419,
+  "lat": 37.4851850,
+  "lon": 126.9830135,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "6",
+    "addr:street": "서초대로",
+    "amenity": "cafe",
+    "branch": "이수역점",
+    "brand": "Tom N Toms",
+    "brand:en": "Tom N Toms",
+    "brand:ko": "탐앤탐스",
+    "brand:wikidata": "Q18142418",
+    "cuisine": "coffee_shop;pretzel;smoothie;tea;bread",
+    "name": "Tom N Toms",
+    "takeaway": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 12192179534,
+  "lat": 37.4876255,
+  "lon": 126.9804574,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "28",
+    "addr:street": "동작대로27길",
+    "addr:subdistrict": "사당동",
+    "amenity": "cafe",
+    "name": "투썸플레이스 이수역점(2층)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192179535,
+  "lat": 37.4876255,
+  "lon": 126.9804574,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "28",
+    "addr:street": "동작대로27길",
+    "addr:unit": "(사당동,3층)",
+    "amenity": "cafe",
+    "name": "투썸플레이스 이수역점(3층)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192179538,
+  "lat": 37.4829036,
+  "lon": 126.9810421,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "43",
+    "addr:street": "사당로30길",
+    "addr:unit": "(사당동,1층)",
+    "amenity": "cafe",
+    "name": "슈보 요단"
+  }
+},
+{
+  "type": "node",
+  "id": 12192179774,
+  "lat": 37.4854685,
+  "lon": 126.9807114,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "May.46",
+    "addr:street": "동작대로27가길",
+    "addr:unit": "(사당동,102호)",
+    "amenity": "cafe",
+    "name": "꼬치박스"
+  }
+},
+{
+  "type": "node",
+  "id": 12192179971,
+  "lat": 37.4762895,
+  "lon": 126.9732106,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "2021",
+    "addr:street": "남부순환로",
+    "addr:unit": "(사당동, (1층 2호))",
+    "amenity": "cafe",
+    "name": "라자루스"
+  }
+},
+{
+  "type": "node",
+  "id": 12192180389,
+  "lat": 37.4835660,
+  "lon": 126.9751186,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "247-7",
+    "addr:street": "사당로",
+    "addr:unit": "(사당동, 1,2층)",
+    "amenity": "cafe",
+    "name": "틈42"
+  }
+},
+{
+  "type": "node",
+  "id": 12192180608,
+  "lat": 37.4848803,
+  "lon": 126.9813571,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "304,",
+    "addr:street": "사당로",
+    "addr:unit": "1층,2층,3층 (사당동)",
+    "amenity": "cafe",
+    "name": "(주) 세녹코리아"
+  }
+},
+{
+  "type": "node",
+  "id": 12192180769,
+  "lat": 37.4768970,
+  "lon": 126.9773865,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "동작구",
+    "addr:housenumber": "2057,",
+    "addr:street": "남부순환로",
+    "addr:unit": "지하1층 (사당동)",
+    "amenity": "cafe",
+    "name": "포도밭에서"
+  }
+},
+{
+  "type": "node",
+  "id": 12192186068,
+  "lat": 37.4778610,
+  "lon": 126.9835249,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "18,",
+    "addr:street": "방배천로4길",
+    "addr:unit": "지하 1층 (방배동)",
+    "amenity": "cafe",
+    "name": "작은 음악회 7080"
+  }
+},
+{
+  "type": "node",
+  "id": 12192205882,
+  "lat": 37.4883298,
+  "lon": 126.9947768,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "115",
+    "addr:street": "서초대로",
+    "addr:unit": "(방배동,정다운빌딩 103호)",
+    "amenity": "cafe",
+    "name": "아뜨리에 파젠다(Atelier FAZENDA)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192222407,
+  "lat": 37.4878433,
+  "lon": 126.9885417,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "95,",
+    "addr:street": "방배중앙로",
+    "addr:unit": "우남빌딩 1층 102호 (방배동)",
+    "amenity": "cafe",
+    "name": "디노블럭"
+  }
+},
+{
+  "type": "node",
+  "id": 12192222857,
+  "lat": 37.4789388,
+  "lon": 126.9894037,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "47",
+    "addr:street": "효령로",
+    "addr:unit": "(방배동, 2층)",
+    "amenity": "cafe",
+    "name": "BEEREN(베렌)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192222930,
+  "lat": 37.4845810,
+  "lon": 126.9946495,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "81,",
+    "addr:street": "효령로31길",
+    "addr:unit": "지하1층 (방배동)",
+    "amenity": "cafe",
+    "name": "담연"
+  }
+},
+{
+  "type": "node",
+  "id": 12192223013,
+  "lat": 37.4887400,
+  "lon": 126.9922882,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "12",
+    "addr:street": "방배로25길",
+    "addr:unit": "(방배동,1층)",
+    "amenity": "cafe",
+    "name": "카페 드 람 cafe de lamp"
+  }
+},
+{
+  "type": "node",
+  "id": 12192223054,
+  "lat": 37.4874481,
+  "lon": 126.9840298,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "16,",
+    "addr:street": "동광로12가길",
+    "addr:subdistrict": "방배동",
+    "addr:unit": "1층",
+    "amenity": "cafe",
+    "name": "수 버거"
+  }
+},
+{
+  "type": "node",
+  "id": 12192223155,
+  "lat": 37.4836295,
+  "lon": 126.9844763,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "11,",
+    "addr:street": "방배천로18길",
+    "addr:unit": "B동 101호 (방배동)",
+    "amenity": "cafe",
+    "name": "KELLER(켈러)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192223572,
+  "lat": 37.4783287,
+  "lon": 127.0007408,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "10-21",
+    "addr:street": "방배로6길",
+    "addr:unit": "(방배동,105호)",
+    "amenity": "cafe",
+    "name": "모이다(moida)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192223648,
+  "lat": 37.4810328,
+  "lon": 126.9822663,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "48,",
+    "addr:street": "동작대로",
+    "addr:unit": "나동 1층 (방배동)",
+    "amenity": "cafe",
+    "name": "BOKA(보카)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192223657,
+  "lat": 37.4778783,
+  "lon": 126.9996762,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "35,",
+    "addr:street": "방배로",
+    "addr:subdistrict": "방배동",
+    "addr:unit": "1층",
+    "amenity": "cafe",
+    "name": "오페라빈"
+  }
+},
+{
+  "type": "node",
+  "id": 12192223694,
+  "lat": 37.4838866,
+  "lon": 126.9950937,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "63,",
+    "addr:street": "효령로31길",
+    "addr:unit": "지하1층 (방배동)",
+    "amenity": "cafe",
+    "name": "아토즈(A to Z)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192223888,
+  "lat": 37.4785131,
+  "lon": 126.9838169,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "33,",
+    "addr:street": "방배천로2안길",
+    "addr:subdistrict": "방배동",
+    "addr:unit": "1층",
+    "amenity": "cafe",
+    "name": "파스타달리"
+  }
+},
+{
+  "type": "node",
+  "id": 12192224162,
+  "lat": 37.4896232,
+  "lon": 126.9940051,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "37,",
+    "addr:street": "서초대로27길",
+    "addr:subdistrict": "방배동",
+    "addr:unit": "1층",
+    "amenity": "cafe",
+    "name": "delight(딜라이트)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192224368,
+  "lat": 37.4875923,
+  "lon": 126.9828907,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "36,",
+    "addr:street": "동광로12가길",
+    "addr:unit": "지상1층 (방배동)",
+    "amenity": "cafe",
+    "name": "카페 유(cafe U)"
+  }
+},
+{
+  "type": "node",
+  "id": 12192224391,
+  "lat": 37.4745482,
+  "lon": 126.9931231,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "128",
+    "addr:street": "효령로2길",
+    "addr:unit": "(방배동)",
+    "amenity": "cafe",
+    "name": "오십사계단커피"
+  }
+},
+{
+  "type": "node",
+  "id": 12192224847,
+  "lat": 37.4777623,
+  "lon": 126.9989514,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "10-3,",
+    "addr:street": "방배로3길",
+    "addr:unit": "지하1층 (방배동)",
+    "amenity": "cafe",
+    "name": "에델바움"
+  }
+},
+{
+  "type": "node",
+  "id": 12192224999,
+  "lat": 37.4917580,
+  "lon": 126.9872723,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "41,",
+    "addr:street": "동광로",
+    "addr:subdistrict": "방배동",
+    "addr:unit": "1층",
+    "amenity": "cafe",
+    "name": "아이엠바리스타"
+  }
+},
+{
+  "type": "node",
+  "id": 12192225011,
+  "lat": 37.4813795,
+  "lon": 126.9984343,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "132,",
+    "addr:street": "효령로",
+    "addr:unit": "지하1층 (방배동)",
+    "amenity": "cafe",
+    "name": "마노핀 갤러리 방배역점"
+  }
+},
+{
+  "type": "node",
+  "id": 12192225938,
+  "lat": 37.4930856,
+  "lon": 126.9894508,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "10-3,",
+    "addr:street": "동광로19길",
+    "addr:unit": "1층 103호 (방배동)",
+    "amenity": "cafe",
+    "name": "로뎀나무"
+  }
+},
+{
+  "type": "node",
+  "id": 12192226782,
+  "lat": 37.4828802,
+  "lon": 126.9963669,
+  "tags": {
+    "addr:city": "서울특별시",
+    "addr:district": "서초구",
+    "addr:housenumber": "97,",
+    "addr:street": "방배로",
+    "addr:unit": "1층 (방배동, 청유빌딩)",
+    "amenity": "cafe",
+    "name": "투썸플레이스 방배역"
+  }
+}
+
+  ]
+}

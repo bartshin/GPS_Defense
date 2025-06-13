@@ -11,6 +11,7 @@ namespace OSM
     const float BuildingOneLevelHeight = 3f;
     public enum HighwayType
     {
+      None,
       Primary,
       Secondary,
       Tertiary
@@ -88,6 +89,7 @@ namespace OSM
       this.ID = OsmUtility.GetAttribute<ulong>("id", xmlNode.Attributes);
       this.Bounds = new OsmBounds(xmlNode.SelectSingleNode("bounds"));
       this.Nodes = new ();
+      this.Highway = HighwayType.None;
       var nodeList = xmlNode.SelectNodes("nd");
       foreach (XmlNode node in nodeList) {
         this.Nodes.Add(new WayNode(node)); 

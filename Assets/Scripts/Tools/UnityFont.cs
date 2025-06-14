@@ -11,7 +11,7 @@ public class EditorFontSize : EditorWindow
   // from the context menu ( Window > Editor Font Size ) - bc this is a hacky way to enforce default global font size on application 
   // launch , on script assembly reload and on application enter / exit play mode 
 
-  public static bool RESIZE_ON_LAUNCH = true;
+  public static bool RESIZE_ON_LAUNCH = false;
   public static int DEFAULT_GLOBAL_FONT_SIZE = 10;
 
   [InitializeOnLoadMethod] static void DefaultSize()

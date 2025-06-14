@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.Splines;
 using OSM;
 using Sirenix.OdinInspector;
 
@@ -86,7 +84,7 @@ public class MapConstructor : MonoBehaviour
     foreach (var way in this.mapReader.Ways) {
       if (way.Highway != OsmWay.HighwayType.None &&
         way.Nodes.Count > 1) {
-        this.ConstructRoad(way);
+        //this.ConstructRoad(way);
       }
       else if (way.Building != null && way.Nodes.Count > 1) {
         this.ConstructBuilding(way);

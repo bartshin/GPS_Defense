@@ -465,7 +465,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  buildingMaterial: {fileID: 2100000, guid: 0f514387dba1e73088c4a74f891c523b, type: 2}
+  buildingMaterial: {fileID: 2100000, guid: 4b1c860e73a573a4ca09e2ed93200a92, type: 2}
   minHeight: 5
 --- !u!114 &694690662
 MonoBehaviour:
@@ -490,7 +490,7 @@ MonoBehaviour:
     SerializationNodes: []
   material: {fileID: 2100000, guid: 472eb2d111c48c2f4a7cc8eab35281e3, type: 2}
   height: 0.2
-  width: 1
+  width: 3
   resolutionMultiplier: 10
 --- !u!1 &837065244
 GameObject:

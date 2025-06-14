@@ -11,9 +11,9 @@ public class MapReader : _MonoBehaviour
   [SerializeField]
   public OsmBounds Bounds { get; private set; }
   [ShowInInspector] 
-  public Dictionary<ulong, OsmNode> Nodes { get; private set; } = new ();
-  [ShowInInspector] 
-  public List<OsmWay> Ways { get; private set; } = new ();
+  public Dictionary<ulong, OsmNode> Nodes { get; private set; }
+  [ShowInInspector]
+  public List<OsmWay> Ways { get; private set; }
   public Action OnFinishRead;
 
   [SerializeField] [FilePath(AbsolutePath = true, ParentFolder = "Assets/Data", Extensions = "xml")]
@@ -50,13 +50,19 @@ public class MapReader : _MonoBehaviour
   [Button("Clear data")]
   void ClearData()
   {
-    this.Nodes.Clear();
-    this.Ways.Clear();
+    this.Nodes?.Clear();
+    this.Ways?.Clear();
   }
 
   [Button("Read data File")]
   void ReadDataFile()
   {
+    if (this.Nodes == null) {
+      this.Nodes = new();
+    }
+    if (this.Ways == null) {
+      this.Ways = new();
+    }
     var data = File.ReadAllText(this.dataPath);
     XmlDocument xmlDoc = new XmlDocument();
     xmlDoc.LoadXml(data);

@@ -4,9 +4,16 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 using OSM;
+using Sirenix.OdinInspector;
 
 public class RoadConstructor : _MonoBehaviour
 {
+  struct MeshData
+  {
+    public List<Vector3> Vertice;
+    public List<Vector2> Uvs;
+    public List<int> Triangles;
+  }
   [SerializeField]
   Material material;
   [SerializeField] 
@@ -15,6 +22,7 @@ public class RoadConstructor : _MonoBehaviour
   float width = 1f;
   [SerializeField] [Range(1, 10)]
   int resolutionMultiplier = 1;
+  SplineContainer splineContainer;
   Vector3[] tempVertices = new Vector3[4];
   Vector2[] tempUvs = new Vector2[4];
   int[] tempTriangles = new int[6];
@@ -22,18 +30,18 @@ public class RoadConstructor : _MonoBehaviour
   float3 tempPosition;
   float3 tempTangent;
   float3 tempUpVector;
+  MeshRenderer meshRenderer;
+  MeshFilter meshFilter;
+
 
   public GameObject Construct(OsmWay way, Vector3 mapCenter)
   {
-    var gameObject = new GameObject(way.Name);
-    var splineContainer = gameObject.AddComponent<SplineContainer>();
-    var meshFilter = gameObject.AddComponent<MeshFilter>();
-    var meshRenderer = gameObject.AddComponent<MeshRenderer>();
+    var road = new GameObject(way.Name);
+    var meshFilter = road.AddComponent<MeshFilter>();
+    var meshRenderer = road.AddComponent<MeshRenderer>();
     var mesh = new Mesh();
     meshRenderer.material = this.material;
-    var spline = splineContainer.Splines.Count == 1 ?
-      splineContainer.Splines[0]:
-      splineContainer.AddSpline();
+    var spline = this.splineContainer.AddSpline();
     this.InitSpline(
       spline: spline,
       way: way,
@@ -51,7 +59,22 @@ public class RoadConstructor : _MonoBehaviour
       );
     meshFilter.mesh = mesh;
     this.height += this.avoidZFighting;
-    return (gameObject);
+    this.splineContainer.RemoveSplineAt(0);
+    return (road);
+  }
+
+  void Awake()
+  {
+    this.Init();
+  }
+
+  [Button("Init")]
+  void Init()
+  {
+    this.splineContainer = this.gameObject.AddComponent<SplineContainer>();
+    for (int i = this.splineContainer.Splines.Count - 1; i >= 0; --i) {
+      this.splineContainer.RemoveSplineAt(i); 
+    }
   }
 
   void InitSpline(Spline spline, OsmWay way, Vector3 mapCenter)

@@ -6,7 +6,6 @@ using UnityEditor;
 using OSM;
 using Sirenix.OdinInspector;
 
-[RequireComponent(typeof(MapReader), typeof(MeshFilter), typeof(MeshRenderer))]
 public class MapConstructor : MonoBehaviour
 {
   [SerializeField] [Required(InfoMessageType.Error)]
@@ -15,58 +14,13 @@ public class MapConstructor : MonoBehaviour
   RoadConstructor roadConstructor;
   [SerializeField] [Required(InfoMessageType.Error)]
   BuildingConstructor buildingConstructor;
-  MeshFilter meshFilter;
-  MeshRenderer meshRenderer;
+  [SerializeField] [Required(InfoMessageType.Error)]
+  RoadContainer roadContainer; 
+  [SerializeField] [Required(InfoMessageType.Error)]
+  BuildingContainer buildingContainer;
   [SerializeField]
   Vector3 center;
-  [ShowInInspector]
-  List<GameObject> buildings = new ();
-  [ShowInInspector]
-  List<GameObject> roads = new ();
-  GameObject container;
 
-  [Button("Destory all roads")]
-  void DestroyAllRoads()
-  {
-    if (Application.isEditor) {
-      foreach (var road in this.roads) {
-        DestroyImmediate(road); 
-      }
-    }
-    else {
-      foreach (var road in this.roads) {
-        Destroy(road); 
-      }
-    }
-    this.roads.Clear();
-  }
-
-  [Button("Destory all buildings")]
-  void DestroyAllBuldings()
-  {
-    if (Application.isEditor) {
-      foreach (var building in this.buildings) {
-        DestroyImmediate(building); 
-      }
-    }
-    else {
-      foreach (var building in this.buildings) {
-        Destroy(building); 
-      }
-    }
-    this.buildings.Clear();
-  }
-
-  void Awake()
-  {
-    if (this.meshFilter == null) {
-      this.meshFilter = this.GetComponent<MeshFilter>();
-    }
-    if (this.meshRenderer == null) {
-      this.meshRenderer = this.GetComponent<MeshRenderer>();
-    }
-    this.container = new GameObject("Map object container");
-  }
 
   void OnEnable()
   {
@@ -81,15 +35,7 @@ public class MapConstructor : MonoBehaviour
   void OnFinishReadMap()
   {
     this.UpdateCenter();
-    foreach (var way in this.mapReader.Ways) {
-      if (way.Highway != OsmWay.HighwayType.None &&
-        way.Nodes.Count > 1) {
-        //this.ConstructRoad(way);
-      }
-      else if (way.Building != null && way.Nodes.Count > 1) {
-        this.ConstructBuilding(way);
-      }
-    }
+    this.ConstructMap();
   }
 
   [Button("Update center")]
@@ -102,12 +48,25 @@ public class MapConstructor : MonoBehaviour
       );
   }
 
+  [Button("Construct map")]
+  void ConstructMap()
+  {
+    foreach (var way in this.mapReader.Ways) {
+      if (way.Highway != OsmWay.HighwayType.None &&
+        way.Nodes.Count > 1) {
+        this.ConstructRoad(way);
+      }
+      else if (way.Building != null && way.Nodes.Count > 1) {
+        this.ConstructBuilding(way);
+      }
+    }
+  }
+
   [Button("Construct road")]
   void ConstructRoad(OsmWay roadBoundary)
   {
     var road = this.roadConstructor.Construct(roadBoundary, this.center); 
-    road.transform.parent = this.container.transform;
-    this.roads.Add(road);
+    this.roadContainer.AddRoad(road);
   }
 
   void DrawVertices(List<Vector3> vertices)
@@ -124,7 +83,6 @@ public class MapConstructor : MonoBehaviour
   void ConstructBuilding(OsmWay buildingBoundary)
   {
     var building = this.buildingConstructor.Construct(buildingBoundary, this.center);
-    this.buildings.Add(building);
-    building.transform.parent = this.container.transform;
+    this.buildingContainer.AddBuilding(building);
   }
 }

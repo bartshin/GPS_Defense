@@ -16,8 +16,8 @@ public class RoadConstructor : _MonoBehaviour
   }
   [SerializeField]
   Material material;
-  [SerializeField] 
-  float height = 0.2f;
+  [SerializeField] [Range(-5f, 5f)]
+  float height;
   [SerializeField] [Range(0.1f, 3f)]
   float width = 1f;
   [SerializeField] [Range(1, 10)]
@@ -26,13 +26,13 @@ public class RoadConstructor : _MonoBehaviour
   Vector3[] tempVertices = new Vector3[4];
   Vector2[] tempUvs = new Vector2[4];
   int[] tempTriangles = new int[6];
-  float avoidZFighting = 0.001f;
+  float avoidZFighting = 0.0001f;
+  int zFightIndex;
   float3 tempPosition;
   float3 tempTangent;
   float3 tempUpVector;
   MeshRenderer meshRenderer;
   MeshFilter meshFilter;
-
 
   public GameObject Construct(OsmWay way, Vector3 mapCenter)
   {
@@ -71,7 +71,9 @@ public class RoadConstructor : _MonoBehaviour
   [Button("Init")]
   void Init()
   {
-    this.splineContainer = this.gameObject.AddComponent<SplineContainer>();
+    if (this.splineContainer == null) {
+      this.splineContainer = this.gameObject.AddComponent<SplineContainer>();
+    }
     for (int i = this.splineContainer.Splines.Count - 1; i >= 0; --i) {
       this.splineContainer.RemoveSplineAt(i); 
     }

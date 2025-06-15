@@ -58,6 +58,8 @@ public class MapConstructor : MonoBehaviour
         this.ConstructBuilding(way);
       }
     }
+    Vector2 mapSize = this.mapReader.Bounds.CalcRange(); 
+    this.roadContainer.SetFloorSize(mapSize);
   }
 
   [Button("Construct road")]

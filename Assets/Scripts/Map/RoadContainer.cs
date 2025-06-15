@@ -5,6 +5,8 @@ using Sirenix.OdinInspector;
 
 public class RoadContainer : _MonoBehaviour
 {
+  [SerializeField] [Required(InfoMessageType.Error)]
+  GameObject floor;
   [ShowInInspector]
   List<GameObject> roads;
   [SerializeField] [Required(InfoMessageType.Error)]
@@ -25,6 +27,15 @@ public class RoadContainer : _MonoBehaviour
       }
     }
     this.roads.Clear();
+  }
+
+  [Button("Set floor size")]
+  public void SetFloorSize(Vector2 size)
+  {
+    this.floor.transform.position = Vector3.zero;
+    this.floor.transform.localScale = new Vector3(
+      size.x, 1, size.y
+      );
   }
 
   public void AddRoad(GameObject road)

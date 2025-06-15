@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 //C# Implementation by Florian Müller, based on the C code published above, 14:50, 20.6.2008; updated to static functions by David Schmitt, 23.4.2010
 
 namespace OSM

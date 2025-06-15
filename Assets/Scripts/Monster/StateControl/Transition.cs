@@ -1,9 +1,12 @@
 using System;
 
-[Serializable]
-public class MonsterTransition 
+namespace Monster
 {
-  public MonsterDecision Decision;
-  public MonsterState trueState;
-  public MonsterState falseState;
+  [Serializable]
+  public class Transition 
+  {
+    public Decision Decision;
+    public State trueState;
+    public State falseState;
+  }
 }

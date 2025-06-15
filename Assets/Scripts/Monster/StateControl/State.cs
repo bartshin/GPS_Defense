@@ -1,39 +1,33 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
-using System;
 
-[CreateAssetMenu(fileName = "NewMonsterState", menuName = "Data/Monster State")]
-public class MonsterState : _ScriptableObject
+namespace Monster
 {
-  public MonsterAction[] Actions;
-  public MonsterTransition[] Transitions;
-  public Color GizmoColor = Color.grey;
-
-  public void UpdateState(MonsterController controller)
+  [CreateAssetMenu(fileName = "NewMonsterState", menuName = "Data/Monster /State")]
+  public class State : _ScriptableObject
   {
-    this.PerformAction(controller);
-    this.CheckTransition(controller);
-  }
+    public Action[] Actions;
+    public Transition[] Transitions;
+    public Dictionary<string, Event> Events;
+    public float ActionInterval;
+    public float TransitionInterval;
+    public Color GizmoColor = Color.grey;
 
-  void CheckTransition(MonsterController controller)
-  {
-    foreach (var transition in this.Transitions) {
-      bool isDecidedToTransition = transition.Decision.Decide(controller);
-      if (isDecidedToTransition) {
-        controller.TransitionTo(transition.trueState);
-      } 
-      else {
-        controller.TransitionTo(transition.falseState);
+    public void UpdateTransition(Controller controller)
+    {
+      foreach (var transition in this.Transitions) {
+        bool isDecidedTrue = transition.Decision.Decide(controller);
+        controller.TransitionTo(
+          isDecidedTrue ? transition.trueState: transition.falseState);
+      }
+    }
+
+    public void PerformAction(Controller controller)
+    {
+      for (int i = 0; i < this.Actions.Length; i++) {
+        this.Actions[i].Act(controller);
       }
     }
   }
 
-  void PerformAction(MonsterController controller)
-  {
-    for (int i = 0; i < this.Actions.Length; i++) {
-      this.Actions[i].Act(controller);
-    }
-  }
 }

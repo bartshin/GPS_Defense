@@ -7,7 +7,7 @@ namespace Unit
   {
     Transform Muzzle; 
     [SerializeField] [Required(InfoMessageType.Error)]
-    public ProjectileStat ProjectileData;
+    public ProjectileStat ProjectileStat;
     [ShowInInspector]
     public AttackController AttackController { get; private set; }
     Animator Animator;
@@ -18,6 +18,7 @@ namespace Unit
     public bool IsFocusing => this.StateController.CurrentState == StateController.FOCUS_ATTACK_STATE;
 
     public BaseDamagable Target { get; set; }
+    Transform rotatePart;
 
     public void Attack(BaseDamagable damagable)
     {
@@ -44,17 +45,25 @@ namespace Unit
       base.Init();
       this.AttackController = new RangeAttackController(
         stat: this.Stat,
-        projectileData: this.ProjectileData,
-        firePoint: this.Muzzle);
+        projectileStat: this.ProjectileStat,
+        firePoint: this.Muzzle,
+        attacker: this.transform);
     }
 
-    void Awake()
+    protected override void Awake()
     {
+      base.Awake();
       if (this.Animator == null) {
         this.Animator = this.GetComponent<Animator>();
       }
       if (this.Muzzle == null) {
         this.Muzzle = Utils.RecursiveFindChild(this.transform, "Muzzle");
+      }
+      if (this.rotatePart == null) {
+        this.rotatePart = Utils.RecursiveFindChild(this.transform, "RotatePart");
+        if (this.rotatePart == null) {
+          this.rotatePart = this.transform;
+        }
       }
       if (this.IsActive) {
         this.Init();
@@ -71,7 +80,7 @@ namespace Unit
           this.Rotate();
         }
         else if (this.IsFocusing && this.Target != null) {
-          this.transform.LookAt(
+          this.rotatePart.LookAt(
             new Vector3(
               this.Target.transform.position.x,
               this.transform.position.y,
@@ -84,7 +93,7 @@ namespace Unit
 
     void Rotate()
     {
-      this.transform.Rotate(new Vector3(
+      this.rotatePart.Rotate(new Vector3(
           0, this.Stat.RotationSpeed * Time.deltaTime, 0
           )
         );

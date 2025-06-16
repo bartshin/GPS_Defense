@@ -15,8 +15,8 @@ namespace Unit
 #if UNITY_EDITOR 
       var attackable = (IAttackAble)unit;
       Debug.DrawRay(
-        start: attackable.AttackPosition,
-        dir: attackable.AttackDirection* unit.Stat.LookRange, 
+        start: unit.transform.position,
+        dir: attackable.AttackDirection * unit.Stat.LookRange, 
         color: this.gizmoColor, 0.3f);
 #endif
       return (this.IsTargetFound(unit)); 
@@ -27,7 +27,7 @@ namespace Unit
       var attackable = (IAttackAble)unit;
       if (
         Physics.SphereCast(
-        attackable.AttackPosition,
+        unit.transform.position,
         unit.Stat.LookSpehreCastRadius,
         attackable.AttackDirection,
         out RaycastHit hitInfo,

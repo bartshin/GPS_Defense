@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70204b3828ef5d78bb474e4cc19392b, type: 3}
+  m_Name: PlayerForceAttack
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Events
+      Entry: 6
+      Data: 
+  Actions:
+  - {fileID: 11400000, guid: 798f0e2154bd022b2b88d17b3d1a0d4b, type: 2}
+  - {fileID: 11400000, guid: c7bdc536b1b08fa5dadc62621de27fc5, type: 2}
+  Transitions:
+  - Decision: {fileID: 11400000, guid: bce08c3aa80f5637fbb69e850907ea5c, type: 2}
+    trueState: {fileID: 11400000, guid: d216290ed5cc1e3aa9219010f317f1a8, type: 2}
+    falseState: {fileID: 11400000, guid: 2bb41dc180dd3b097a6dfac8de5a7bf5, type: 2}
+  - Decision: {fileID: 11400000, guid: 9b4e528591caeb735821a0c001a5cc4c, type: 2}
+    trueState: {fileID: 11400000, guid: bc021f9e6b1b00f169cec3b18372e435, type: 2}
+    falseState: {fileID: 11400000, guid: d216290ed5cc1e3aa9219010f317f1a8, type: 2}
+  ActionInterval: 1
+  TransitionInterval: 1
+  GizmoColor: {r: 1, g: 0, b: 0.05047798, a: 1}

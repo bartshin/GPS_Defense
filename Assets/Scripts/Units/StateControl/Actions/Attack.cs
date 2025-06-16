@@ -15,7 +15,11 @@ namespace Unit
      #if UNITY_EDITOR
       var attackable = (IAttackAble)unit;
       Debug.DrawRay(
-        start: attackable.AttackPosition,
+        start: new Vector3(
+          attackable.AttackPosition.x,
+          unit.transform.position.y,
+          attackable.AttackPosition.z
+          ),
         dir: attackable.AttackDirection * unit.Stat.AttackRange,
         this.gizmoColor, 0.3f);
       #endif
@@ -26,12 +30,16 @@ namespace Unit
 
     void Attack(BaseUnit unit)
     {
-      var attackAble = (IAttackAble)unit;
+      var attackable = (IAttackAble)unit;
       if (
         Physics.SphereCast(
-          attackAble.AttackPosition,
+          new Vector3(
+            attackable.AttackPosition.x,
+            unit.transform.position.y,
+            attackable.AttackPosition.z
+            ),
           unit.Stat.LookSpehreCastRadius,
-          attackAble.AttackDirection,
+          attackable.AttackDirection,
           out RaycastHit hitInfo,
           unit.Stat.AttackRange)
         ) {
@@ -41,10 +49,9 @@ namespace Unit
         }
         var damagable = UnitManager.Shared.GetDamagableFrom(hitInfo.collider.gameObject);
         if (damagable != null && damagable.IsAlive) {
-          attackAble.Attack(damagable);    
+          attackable.Attack(damagable);    
         }
       }
     }
   }
-
 }

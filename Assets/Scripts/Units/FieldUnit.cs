@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,8 +9,7 @@ namespace Unit
 {
   public class FieldUnit: BaseUnit, IChasable, IPatrolable, IAttackAble
   { 
-    [SerializeField] [Required(InfoMessageType.Error)] 
-    public Transform Eye { get; private set; }
+    static WaitForSeconds WAIT_FOR_DIE = new WaitForSeconds(0.7f);
     public NavMeshAgent NavMeshAgent => this.navMeshAgent;
     [HideInInspector]
     public NavMeshAgent navMeshAgent { get; private set; }
@@ -25,7 +25,7 @@ namespace Unit
     public int nextWayPoint;
     public BaseDamagable ChaseTarget { get; set; }
     [ShowInInspector]
-    public AttackController AttackController { get; private set; }
+    public AttackController AttackController;
     [HideInInspector]
     public Rigidbody rb { get; private set; }
 
@@ -37,6 +37,10 @@ namespace Unit
       get => this.ChaseTarget;
       set => this.ChaseTarget = value;
     }
+
+    [HideInInspector]
+    public Transform Eye { get; private set; }
+    Animator animator;
 
     [Button("Activate")]
     public void Activate()
@@ -57,8 +61,20 @@ namespace Unit
       this.WayPoints.Add(pos);
     }
 
-    void Awake()
+    protected override void Awake()
     {
+      base.Awake();
+      this.WayPoints = new ();
+      if (this.navMeshAgent == null) {
+        this.navMeshAgent = this.GetComponent<NavMeshAgent>();
+      }
+      if (this.rb == null) {
+        this.rb = this.GetComponent<Rigidbody>();
+      }
+      if (this.animator == null) {
+        this.animator = this.GetComponent<Animator>();
+      }
+      this.Eye = this.GetEyeTransform();
       if (this.IsActive) {
         this.Init();
       }
@@ -71,8 +87,9 @@ namespace Unit
       }
     }
 
-    void OnDisable()
+    protected override void OnDisable()
     {
+      base.OnDisable();
       if (this.Damagable != null) {
         this.Damagable.OnDamaged -= this.OnDamaged;
       }
@@ -84,6 +101,7 @@ namespace Unit
       if (this.IsActive) {
         this.AttackController.Update();
       }
+      this.animator.SetFloat("MoveSpeed", this.navMeshAgent.velocity.magnitude);
     }
 
     void OnDrawGizmos()
@@ -93,6 +111,11 @@ namespace Unit
         Gizmos.color = this.StateController.CurrentState.GizmoColor;
         Gizmos.DrawSphere(this.Eye.position, 0.3f);
       }
+    }
+
+    Transform GetEyeTransform()
+    {
+      return (Utils.RecursiveFindChild(this.transform, "Eye"));
     }
 
     [Button("Set waypoints")]
@@ -110,20 +133,21 @@ namespace Unit
     public override void Init()
     {
       base.Init();
-      if (this.navMeshAgent == null) {
-        this.navMeshAgent = this.GetComponent<NavMeshAgent>();
+      if (this.Stat.IsMeleeMonster) {
+        this.AttackController = new MeleeAttackController(this.Stat, this.transform);
       }
-      if (this.rb == null) {
-        this.rb = this.GetComponent<Rigidbody>();
+      else {
+        this.AttackController = new RangeAttackController(
+          stat: this.Stat,
+          projectileStat: this.projectileStat,
+          firePoint: this.Eye,
+          attacker: this.transform
+          );
       }
-      this.AttackController = new AttackController(this.Stat);
       this.navMeshAgent.speed = this.Stat.Speed;
       this.navMeshAgent.acceleration = this.Stat.Acceleration;
       this.navMeshAgent.stoppingDistance = this.Stat.StoppingDistance;
       this.navMeshAgent.angularSpeed = this.Stat.RotationSpeed;
-      if (this.WayPoints == null) {
-        this.WayPoints = new ();
-      }
     }
 
     void OnDamaged()
@@ -135,11 +159,27 @@ namespace Unit
           )) {
         unitEvent.OnEventOccur(this);
       }
+      if (this.Damagable.Hp.Value.current > 0) {
+        this.animator.SetTrigger("Hit");
+      }
+      else {
+        Debug.Log("die");
+        this.StartCoroutine(this.DieRoutine());
+      }
     }
 
-        public void Attack(BaseDamagable damagable)
-        {
-            throw new NotImplementedException();
-        }
+    IEnumerator DieRoutine()
+    {
+      this.IsActive = false;
+      this.animator.SetTrigger("Die");
+      yield return (WAIT_FOR_DIE);
+      this.gameObject.SetActive(false);
     }
+
+    public void Attack(BaseDamagable damagable)
+    {
+      this.AttackController.Attack(damagable);
+      this.animator.SetTrigger("Attack");
+    }
+  }
 }

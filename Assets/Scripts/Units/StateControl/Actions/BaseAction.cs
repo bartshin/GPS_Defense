@@ -5,5 +5,4 @@ namespace Unit
   {
     public abstract void Act(BaseUnit unit);
   }
-
 }

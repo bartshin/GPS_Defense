@@ -33,7 +33,7 @@ public class BaseDamagable : MonoBehaviour, IDamagable
   }
 
   [Button ("TakeDamage from")]
-  int IDamagable.TakeDamage(int attackDamage, Transform attacker)
+  public int TakeDamage(int attackDamage, Transform attacker)
   {
     this.LastAttacker = attacker;
     return (this.TakeDamage(attackDamage));

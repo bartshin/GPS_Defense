@@ -20,8 +20,6 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
   virtual protected Vector3 direction { get; set; }
   [SerializeField]
   virtual public int Damage { get; set; }
-  [SerializeField]
-  virtual public float Speed { get; set; }
   [ShowInInspector]
   virtual public BaseDamagable Target 
   { 
@@ -45,7 +43,7 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
   protected virtual void Update()
   {
     this.remainingLifeTime -= Time.deltaTime;
-    this.transform.position += this.direction * this.Speed * Time.deltaTime;
+    this.transform.position += this.direction * this.Data.Speed * Time.deltaTime;
     if (this.remainingLifeTime < 0) {
       this.DestroySelf();
     }
@@ -61,8 +59,6 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
     this.remainingLifeTime = this.Data.LifeTime;
     this.projectileCollider.includeLayers = (this.Data.TargetLayer.value);
     this.projectileCollider.excludeLayers = ~(this.Data.TargetLayer.value);
-    Debug.Log(this.data.TargetLayer.value);
-    this.Speed = this.Data.Speed;
   }
 
   private void SetDirection()

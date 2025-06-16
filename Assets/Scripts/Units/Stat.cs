@@ -6,11 +6,6 @@ namespace Unit
   [CreateAssetMenu(menuName = "Data/Unit/Stat")]
   public class Stat : _ScriptableObject
   {
-    [BoxGroup("Prefab")] [PreviewField(75)] [AssetsOnly] 
-    public GameObject Prefab;
-    [VerticalGroup("Basic")]
-    public string Name;
-
     [BoxGroup("Health")] [Range(1f, 1000f)]
     public int Hp;
 
@@ -28,6 +23,8 @@ namespace Unit
     [BoxGroup("Decision")] [Range(5f, 50f)]
     public float LookRange;
 
+    [BoxGroup("Attack")][Required(InfoMessageType.Error)]
+    public bool IsMeleeMonster;
     [BoxGroup("Attack")] [Range(0, 30)]
     public int AttackDamage;
     [BoxGroup("Attack")] [Range(0.5f, 100f)]

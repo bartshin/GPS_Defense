@@ -1,13 +1,17 @@
 using UnityEngine;
+using Architecture;
+using System;
 
 namespace Unit
 {
-  public abstract class BaseUnit: _MonoBehaviour, IStateControlable
+  public abstract class BaseUnit: _MonoBehaviour, IStateControlable, IPooledObject
   {
     [SerializeField]
     public bool IsActive { get; protected set; }
     [SerializeField]
     public Stat Stat { get; set; }
+    [SerializeField]
+    public ProjectileStat projectileStat;
     [SerializeField]
     public State DefaultState
     { 
@@ -22,6 +26,7 @@ namespace Unit
     State defaultState;
     public BaseDamagable Damagable { get; protected set; }
     public StateController StateController { get; protected set; }
+    public Action<IPooledObject> OnDisabled { get; set; }
 
     public void Reset()
     {
@@ -37,11 +42,18 @@ namespace Unit
     public virtual void Init()
     {
       this.StateController = new StateController(this.DefaultState);
-      if (this.Damagable == null) {
-        this.Damagable = this.gameObject.AddComponent<BaseDamagable>();
-      }
       if (this.Damagable != null) {
         this.Damagable.SetMaxHp(this.Stat.Hp);
+      }
+    }
+
+    protected virtual void Awake()
+    {
+      if (this.Damagable == null) {
+        this.Damagable = this.gameObject.GetComponent<BaseDamagable>();
+      }
+      if (this.Damagable == null) {
+        this.Damagable = this.gameObject.AddComponent<BaseDamagable>();
       }
     }
 
@@ -57,6 +69,13 @@ namespace Unit
           this.StateController.CurrentState.UpdateTransition(this);  
           this.StateController.ResetTransitionDeley();
         }
+      }
+    }
+
+    protected virtual void OnDisable()
+    {
+      if (this.OnDisabled != null) {
+        this.OnDisabled.Invoke(this);
       }
     }
   }

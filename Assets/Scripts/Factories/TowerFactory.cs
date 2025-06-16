@@ -45,11 +45,11 @@ public class TowerFactory : MonoBehaviour
     var gameObject = Instantiate(resource.Prefab);
     gameObject.transform.position = new Vector3(
       position.x,
-      position.y + resource.TowerHeight * 0.5f,
+      position.y,
       position.z
       );
     var tower = gameObject.AddComponent<Tower>();
-    tower.ProjectileData = resource.Projectile;
+    tower.ProjectileStat = resource.Projectile;
     tower.DefaultState = resource.DefaultState;
     tower.Stat = resource.TowerStat;
     tower.Init();

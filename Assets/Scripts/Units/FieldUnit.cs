@@ -32,6 +32,11 @@ namespace Unit
     public bool IsAttackable => this.AttackController.IsAttackable;
     public Vector3 AttackPosition => this.Eye.position;
     public Vector3 AttackDirection => this.Eye.forward;
+    public BaseDamagable Target 
+    {
+      get => this.ChaseTarget;
+      set => this.ChaseTarget = value;
+    }
 
     [Button("Activate")]
     public void Activate()

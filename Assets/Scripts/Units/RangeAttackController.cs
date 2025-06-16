@@ -33,7 +33,6 @@ namespace Unit
     {
       var gameObject = GameObject.Instantiate(this.projectileData.Prefab);
       var projectile = gameObject.GetComponent<BaseProjectile>(); 
-      Debug.Log($"projectile: {projectile}");
       projectile.Data = this.projectileData;
       return (projectile);
     }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e70204b3828ef5d78bb474e4cc19392b, type: 3}
-  m_Name: Focus
+  m_Name: FocusAttack
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -24,8 +24,15 @@ MonoBehaviour:
     - Name: Events
       Entry: 6
       Data: 
-  Actions: []
-  Transitions: []
+  Actions:
+  - {fileID: 11400000, guid: 8096d342ea88afec9bafa52f1688d925, type: 2}
+  Transitions:
+  - Decision: {fileID: 11400000, guid: bce08c3aa80f5637fbb69e850907ea5c, type: 2}
+    trueState: {fileID: 11400000, guid: d216290ed5cc1e3aa9219010f317f1a8, type: 2}
+    falseState: {fileID: 11400000, guid: 43cd3547e75106d82b522ff90ed98c16, type: 2}
+  - Decision: {fileID: 11400000, guid: 1a6728d78f5820734b8ea1181abf4d69, type: 2}
+    trueState: {fileID: 11400000, guid: d216290ed5cc1e3aa9219010f317f1a8, type: 2}
+    falseState: {fileID: 11400000, guid: 43cd3547e75106d82b522ff90ed98c16, type: 2}
   ActionInterval: 0
   TransitionInterval: 0
   GizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

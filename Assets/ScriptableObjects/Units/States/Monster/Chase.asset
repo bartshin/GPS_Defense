@@ -20,12 +20,18 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Events
+      Entry: 6
+      Data: 
   Actions:
   - {fileID: 11400000, guid: 798f0e2154bd022b2b88d17b3d1a0d4b, type: 2}
   - {fileID: 11400000, guid: c7bdc536b1b08fa5dadc62621de27fc5, type: 2}
   Transitions:
   - Decision: {fileID: 11400000, guid: bce08c3aa80f5637fbb69e850907ea5c, type: 2}
+    trueState: {fileID: 11400000, guid: d216290ed5cc1e3aa9219010f317f1a8, type: 2}
+    falseState: {fileID: 11400000, guid: 72ca36d1495cad57b999e1eb3c96a6e2, type: 2}
+  - Decision: {fileID: 11400000, guid: 02ed24ace03d54ae68d87794fc6858fe, type: 2}
     trueState: {fileID: 11400000, guid: d216290ed5cc1e3aa9219010f317f1a8, type: 2}
     falseState: {fileID: 11400000, guid: 72ca36d1495cad57b999e1eb3c96a6e2, type: 2}
   ActionInterval: 0.5

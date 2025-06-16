@@ -39,8 +39,8 @@ namespace Unit
         }
         var damagable = UnitManager.Shared.GetDamagableFrom(hitInfo.collider.gameObject);
         if (damagable != null) {
-          if (unit is IChasable chasable) {
-            chasable.ChaseTarget = damagable;
+          if (unit is IAttackAble attackAble) {
+            attackAble.Target = damagable;
           }
           return (true);
         }

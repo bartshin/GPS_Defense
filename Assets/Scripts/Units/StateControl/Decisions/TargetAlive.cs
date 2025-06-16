@@ -7,10 +7,12 @@ namespace Unit
   {
     public override bool Decide(BaseUnit unit)
     {
-      var chasable = (IChasable)unit;
-      var isAlive = chasable.ChaseTarget.IsAlive;
-      if (!isAlive) {
-        chasable.ChaseTarget = null;
+      bool isAlive = false;
+      if (unit is IAttackAble attackAble) {
+        isAlive = attackAble.Target.IsAlive;
+        if (!isAlive) {
+          attackAble.Target = null;
+        }
       }
       return (isAlive);
     }

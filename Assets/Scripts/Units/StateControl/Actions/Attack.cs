@@ -14,10 +14,9 @@ namespace Unit
     {
      #if UNITY_EDITOR
       var attackable = (IAttackAble)unit;
-      var fieldUnit = (FieldUnit)unit;
       Debug.DrawRay(
         start: attackable.AttackPosition,
-        dir: attackable.AttackDirection * fieldUnit.Stat.AttackRange,
+        dir: attackable.AttackDirection * unit.Stat.AttackRange,
         this.gizmoColor, 0.3f);
       #endif
       if (attackable.IsAttackable) {

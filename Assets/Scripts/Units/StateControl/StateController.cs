@@ -7,10 +7,14 @@ namespace Unit {
   public class StateController
   {
     [SerializeField]
-    static State REMAIN_STATE;
+    public readonly static State REMAIN_STATE;
+    public readonly static State ROTATE_STATE;
+    public readonly static State FOCUS_ATTACK_STATE;
     static StateController()
     {
-      REMAIN_STATE = Resources.Load<State>("ScriptableObjects/RemainState");
+      REMAIN_STATE = Resources.Load<State>("Remain");
+      ROTATE_STATE = Resources.Load<State>("Rotate");
+      FOCUS_ATTACK_STATE = Resources.Load<State>("FocusAttack");
     }
     [SerializeField] [BoxGroup ("State")]
     public State CurrentState { get; private set; }

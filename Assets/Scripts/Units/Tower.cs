@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -9,8 +7,6 @@ namespace Unit
   {
     [SerializeField] [Required(InfoMessageType.Error)]
     Transform attackPoint; 
-    [SerializeField]
-    State rotateState;
     [SerializeField] [Required(InfoMessageType.Error)]
     ProjectileData projectileData;
     [ShowInInspector]
@@ -18,7 +14,10 @@ namespace Unit
     public bool IsAttackable => this.AttackController.IsAttackable;
     public Vector3 AttackPosition => this.attackPoint.position;
     public Vector3 AttackDirection => this.attackPoint.forward;
-    public bool IsRotating => this.StateController.CurrentState == this.rotateState;
+    public bool IsRotating => this.StateController.CurrentState == StateController.ROTATE_STATE;
+    public bool IsFocusing => this.StateController.CurrentState == StateController.FOCUS_ATTACK_STATE;
+
+    public BaseDamagable Target { get; set; }
 
     void Awake()
     {
@@ -60,6 +59,9 @@ namespace Unit
         this.AttackController.Update();
         if (this.IsRotating) {
           this.Rotate();
+        }
+        else if (this.IsFocusing && this.Target != null) {
+          this.transform.LookAt(this.Target.transform);
         }
       }
     }

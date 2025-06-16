@@ -7,7 +7,6 @@ namespace Unit
     public Stat Stat { get; private set; }
     public bool IsAttackable => (this.remainingDelay <= 0);
     protected float remainingDelay;
-    protected Transform lastTarget;
 
     public AttackController(Stat stat)
     {
@@ -17,6 +16,7 @@ namespace Unit
 
     public virtual void Attack(BaseDamagable damagable)
     {
+      
     }
 
     public virtual void Update()

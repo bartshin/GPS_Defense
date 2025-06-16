@@ -5,28 +5,30 @@ namespace Unit
   [CreateAssetMenu(menuName = "Data/Unit/Action/Chase")]
   public class ChaseAction : Action
   {
-    public override void Act(Controller controller)
+    public override void Act(BaseUnit unit)
     {
-      this.Chase(controller);
+      this.Chase(unit);
     }
 
-    void Chase(Controller controller)
+    void Chase(BaseUnit unit)
     {
-      if (controller.navMeshAgent.hasPath &&
-        controller.navMeshAgent.remainingDistance < controller.navMeshAgent.stoppingDistance
+      var chasable = (IChasable)unit;
+      var navMeshAgent = chasable.NavMeshAgent;
+      if (navMeshAgent.hasPath &&
+        navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance
         ){
         var dist = Vector3.Distance(
-          controller.transform.position,
-          controller.ChaseTarget.transform.position
+          unit.transform.position,
+          chasable.ChaseTarget.transform.position
           );
-        if (dist < controller.Data.StoppingDistance) {
-          controller.transform.LookAt(controller.ChaseTarget.transform);
-          controller.navMeshAgent.isStopped = true;
+        if (dist < unit.Stat.StoppingDistance) {
+          unit.transform.LookAt(chasable.ChaseTarget.transform);
+          navMeshAgent.isStopped = true;
           return;
         }
       }
-      controller.navMeshAgent.SetDestination(controller.ChaseTarget.transform.position);
-      controller.navMeshAgent.isStopped = false;
+      navMeshAgent.SetDestination(chasable.ChaseTarget.transform.position);
+      navMeshAgent.isStopped = false;
     }
   }
 }

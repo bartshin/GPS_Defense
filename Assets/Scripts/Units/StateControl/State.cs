@@ -13,19 +13,19 @@ namespace Unit
     public float TransitionInterval;
     public Color GizmoColor = Color.grey;
 
-    public void UpdateTransition(Controller controller)
+    public void UpdateTransition(BaseUnit unit)
     {
       foreach (var transition in this.Transitions) {
-        bool isDecidedTrue = transition.Decision.Decide(controller);
-        controller.TransitionTo(
+        bool isDecidedTrue = transition.Decision.Decide(unit);
+        unit.StateController.TransitionTo(
           isDecidedTrue ? transition.trueState: transition.falseState);
       }
     }
 
-    public void PerformAction(Controller controller)
+    public void PerformAction(BaseUnit unit)
     {
       for (int i = 0; i < this.Actions.Length; i++) {
-        this.Actions[i].Act(controller);
+        this.Actions[i].Act(unit);
       }
     }
   }

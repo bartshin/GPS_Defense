@@ -10,16 +10,17 @@ namespace Unit
     [SerializeField]
     float hpThreshold;
 
-    public override bool React(Controller controller)
+    public override bool React(BaseUnit unit)
     {
-      if (controller.Damagable.Hp.Value.current > this.hpThreshold) {
-        if (controller.ChaseTarget != null) {
+      var chasable = (IChasable)unit;
+      if (unit.Damagable.Hp.Value.current > this.hpThreshold) {
+        if (chasable.ChaseTarget != null) {
           return (true);
         }
         else {
-          var attacker = controller.Damagable.LastAttacker.GetComponent<BaseDamagable>();
+          var attacker = unit.Damagable.LastAttacker.GetComponent<BaseDamagable>();
           if (attacker != null) {
-            controller.ChaseTarget = attacker;
+            chasable.ChaseTarget = attacker;
             return (true);
           }
           else {

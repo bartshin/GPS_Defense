@@ -9,28 +9,32 @@ namespace Unit
     Color gizmoColor;
     [SerializeField]
     LayerMask targetLayer;
-    public override void Act(Controller controller)
+
+    public override void Act(BaseUnit unit)
     {
      #if UNITY_EDITOR
+      var attackable = (IAttackAble)unit;
+      var fieldUnit = (FieldUnit)unit;
       Debug.DrawRay(
-        start: controller.Eye.position,
-        dir: controller.Eye.forward * controller.Data.AttackRange,
+        start: attackable.AttackPosition,
+        dir: attackable.AttackDirection * fieldUnit.Stat.AttackRange,
         this.gizmoColor, 0.3f);
       #endif
-      if (controller.AttackController.IsAttackable) {
-        this.Attack(controller);
+      if (attackable.IsAttackable) {
+        this.Attack(unit);
       }
     }
 
-    void Attack(Controller controller)
+    void Attack(BaseUnit unit)
     {
+      var attackAble = (IAttackAble)unit;
       if (
         Physics.SphereCast(
-          controller.Eye.position,
-          controller.Data.LookSpehreCastRadius,
-          controller.Eye.forward,
+          attackAble.AttackPosition,
+          unit.Stat.LookSpehreCastRadius,
+          attackAble.AttackDirection,
           out RaycastHit hitInfo,
-          controller.Data.AttackRange)
+          unit.Stat.AttackRange)
         ) {
         var hitLayer = (1 << hitInfo.collider.gameObject.layer);
         if ((hitLayer & this.targetLayer.value) == 0) {
@@ -39,7 +43,7 @@ namespace Unit
         //FIXME: remove GetComponent 
         var damagable = hitInfo.collider.gameObject.GetComponent<BaseDamagable>();
         if (damagable != null && damagable.IsAlive) {
-          controller.AttackController.Attack(damagable);    
+          attackAble.Attack(damagable);    
         }
       }
     }

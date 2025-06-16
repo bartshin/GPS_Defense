@@ -16,11 +16,11 @@ namespace Unit
     [SerializeField]
     State falseState;
 
-    public void OnEventOccur(Controller controller)
+    public void OnEventOccur(BaseUnit unit)
     {
-      if (this.trigger.IsTriggerToReact(controller)) {
-        bool reactionResult = this.reaction.React(controller);
-        controller.TransitionTo(reactionResult ? trueState: falseState);
+      if (this.trigger.IsTriggerToReact(unit)) {
+        bool reactionResult = this.reaction.React(unit);
+        unit.StateController.TransitionTo(reactionResult ? trueState: falseState);
       }
     }
   }

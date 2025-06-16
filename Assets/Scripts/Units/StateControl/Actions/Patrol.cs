@@ -5,20 +5,22 @@ namespace Unit
   [CreateAssetMenu(menuName = "Data/Unit/Action/Patrol")]
   public class PatrolAction : Action
   {
-    public override void Act(Controller controller)
+    public override void Act(BaseUnit unit)
     {
-      this.Patrol(controller);
+      this.Patrol(unit);
     }
 
-    void Patrol(Controller controller)
+    void Patrol(BaseUnit unit)
     {
-      controller.navMeshAgent.destination = controller.WayPoints[controller.nextWayPoint];
-      controller.navMeshAgent.isStopped = false;
+      var patrolAble = (IPatrolable)unit;
+      var navMeshAgent = patrolAble.NavMeshAgent;
+      navMeshAgent.destination = patrolAble.WayPoints[patrolAble.NextWayPoint];
+      navMeshAgent.isStopped = false;
 
-      if (!controller.navMeshAgent.pathPending &&
-        (controller.navMeshAgent.remainingDistance <
-         controller.navMeshAgent.stoppingDistance)) {
-        controller.nextWayPoint = (controller.nextWayPoint + 1) % controller.WayPoints.Count;
+      if (!navMeshAgent.pathPending &&
+        (navMeshAgent.remainingDistance <
+         navMeshAgent.stoppingDistance)) {
+       patrolAble.NextWayPoint = (patrolAble.NextWayPoint + 1) % patrolAble.WayPoints.Count;
       }
     }
   }

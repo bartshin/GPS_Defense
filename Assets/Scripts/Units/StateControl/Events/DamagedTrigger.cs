@@ -8,9 +8,9 @@ namespace Unit
     [SerializeField]
     int agroThreshold;
 
-    public override bool IsTriggerToReact(Controller controller)
+    public override bool IsTriggerToReact(BaseUnit unit)
     {
-      if (controller.Damagable.LastDamage > this.agroThreshold) {
+      if (unit.Damagable.LastDamage > this.agroThreshold) {
         return (true);
       }
       return (false);

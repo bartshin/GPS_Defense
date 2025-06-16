@@ -1,5 +1,4 @@
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 namespace Unit
 {
@@ -9,9 +8,9 @@ namespace Unit
     [SerializeField] [Range(0f, 1f)]
     float hpPercentageThreshold;
 
-    public override bool Decide(Controller controller)
+    public override bool Decide(BaseUnit unit)
     {
-      var (current, max) = controller.Damagable.Hp.Value;
+      var (current, max) = unit.Damagable.Hp.Value;
       return (this.hpPercentageThreshold > ((float)current / (float)max));
     }
   }

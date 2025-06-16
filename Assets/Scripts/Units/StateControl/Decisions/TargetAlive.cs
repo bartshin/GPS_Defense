@@ -5,11 +5,12 @@ namespace Unit
   [CreateAssetMenu(menuName = "Data/Unit/Decision/Target Alive")]
   public class TargetAliveDecision : Decision
   {
-    public override bool Decide(Controller controller)
+    public override bool Decide(BaseUnit unit)
     {
-      var isAlive = (controller.ChaseTarget.IsAlive);
+      var chasable = (IChasable)unit;
+      var isAlive = chasable.ChaseTarget.IsAlive;
       if (!isAlive) {
-        controller.ChaseTarget = null;
+        chasable.ChaseTarget = null;
       }
       return (isAlive);
     }

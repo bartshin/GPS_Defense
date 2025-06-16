@@ -8,18 +8,15 @@ namespace Unit
     [SerializeField]
     float runAwayDistance;
 
-    public override void Act(Controller controller)
+    public override void Act(BaseUnit unit)
     {
-      Vector3 dir;
-      if (controller.Damagable.LastAttacker != null) {
-        dir = - (controller.Damagable.LastAttacker.position - controller.transform.position).normalized; 
+      if (unit.Damagable.LastAttacker != null) {
+        var navMeshAgent = ((INavMeshMovable)unit).NavMeshAgent;
+        var dir = - (unit.Damagable.LastAttacker.position - unit.transform.position).normalized; 
+        navMeshAgent.SetDestination(
+          unit.transform.position + dir * this.runAwayDistance);
+        navMeshAgent.isStopped = false;
       }
-      else {
-        dir = (controller.Shelther - controller.transform.position).normalized;
-      }
-      controller.navMeshAgent.SetDestination(
-        controller.transform.position + dir * this.runAwayDistance);
-      controller.navMeshAgent.isStopped = false;
     }
   }
 }

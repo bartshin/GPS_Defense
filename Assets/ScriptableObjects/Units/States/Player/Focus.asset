@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d76406b7bac224817a7b0fcbdb6aa57b, type: 3}
-  m_Name: TestTower
+  m_Script: {fileID: 11500000, guid: e70204b3828ef5d78bb474e4cc19392b, type: 3}
+  m_Name: Focus
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -20,17 +20,12 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  Prefab: {fileID: 0}
-  ProjectilePrefab: {fileID: 0}
-  Name: 
-  Hp: 200
-  Speed: 0
-  Acceleration: 0
-  StoppingDistance: 0
-  RotationSpeed: 50
-  LookSpehreCastRadius: 0.2
-  LookRange: 40
-  AttackDamage: 10
-  AttackRange: 10
-  AttackDelay: 0.5
+    SerializationNodes:
+    - Name: Events
+      Entry: 6
+      Data: 
+  Actions: []
+  Transitions: []
+  ActionInterval: 0
+  TransitionInterval: 0
+  GizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

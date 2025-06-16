@@ -24,7 +24,7 @@ namespace Unit
     [HideInInspector]
     public int nextWayPoint;
     public BaseDamagable ChaseTarget { get; set; }
-    [HideInInspector]
+    [ShowInInspector]
     public AttackController AttackController { get; private set; }
     [HideInInspector]
     public Rigidbody rb { get; private set; }
@@ -71,19 +71,11 @@ namespace Unit
       }
     }
 
-    void Update()
+    protected override void Update()
     {
+      base.Update();
       if (this.IsActive) {
         this.AttackController.Update();
-        this.StateController.Update();
-        if (this.StateController.IsAbleToAct) {
-          this.StateController.CurrentState.PerformAction(this);
-          this.StateController.ResetActionDelay();
-        }
-        if (this.StateController.IsAbleToTransition) {
-          this.StateController.CurrentState.UpdateTransition(this);  
-          this.StateController.ResetTransitionDeley();
-        }
       }
     }
 

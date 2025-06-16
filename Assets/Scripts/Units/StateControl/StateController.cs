@@ -8,12 +8,15 @@ namespace Unit {
   {
     [SerializeField]
     static State REMAIN_STATE;
+    static StateController()
+    {
+      REMAIN_STATE = Resources.Load<State>("ScriptableObjects/RemainState");
+    }
     [SerializeField] [BoxGroup ("State")]
     public State CurrentState { get; private set; }
     [SerializeField] [Required(InfoMessageType.Error)] [BoxGroup ("State")]
     public bool IsAbleToAct => this.actionRemainingDelay <= 0;
     public bool IsAbleToTransition => this.transitionRemainingDelay <= 0;
-    State RemainState;
     float actionRemainingDelay;
     float transitionRemainingDelay;
 
@@ -24,7 +27,7 @@ namespace Unit {
     [Button("Transition to new state")]
     public void TransitionTo(State nextState)
     {
-      if (nextState != this.RemainState) {
+      if (nextState != REMAIN_STATE) {
         this.OnExitState(this.CurrentState);
         this.CurrentState = nextState; 
         this.OnEnterState(nextState);

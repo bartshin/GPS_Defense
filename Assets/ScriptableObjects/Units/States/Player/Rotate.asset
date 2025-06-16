@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70204b3828ef5d78bb474e4cc19392b, type: 3}
+  m_Name: Rotate
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: Events
+      Entry: 6
+      Data: 
+  Actions: []
+  Transitions:
+  - Decision: {fileID: 11400000, guid: af4bc62171541357a97ced00d3f41c03, type: 2}
+    trueState: {fileID: 11400000, guid: 38c8dcc54228760499ff3987d7667e83, type: 2}
+    falseState: {fileID: 11400000, guid: d216290ed5cc1e3aa9219010f317f1a8, type: 2}
+  ActionInterval: 100000
+  TransitionInterval: 0.3
+  GizmoColor: {r: 0.34440595, g: 0.9915668, b: 0.17383236, a: 1}

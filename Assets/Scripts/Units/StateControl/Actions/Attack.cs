@@ -40,8 +40,7 @@ namespace Unit
         if ((hitLayer & this.targetLayer.value) == 0) {
           return;
         }
-        //FIXME: remove GetComponent 
-        var damagable = hitInfo.collider.gameObject.GetComponent<BaseDamagable>();
+        var damagable = UnitManager.Shared.GetDamagableFrom(hitInfo.collider.gameObject);
         if (damagable != null && damagable.IsAlive) {
           attackAble.Attack(damagable);    
         }

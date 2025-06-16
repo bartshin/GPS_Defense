@@ -9,12 +9,16 @@ namespace Unit
   {
     [SerializeField] [Required(InfoMessageType.Error)]
     Transform attackPoint; 
+    [SerializeField]
+    State rotateState;
+    [SerializeField] [Required(InfoMessageType.Error)]
+    ProjectileData projectileData;
+    [ShowInInspector]
     public AttackController AttackController { get; private set; }
     public bool IsAttackable => this.AttackController.IsAttackable;
     public Vector3 AttackPosition => this.attackPoint.position;
     public Vector3 AttackDirection => this.attackPoint.forward;
-    float stopRotatingDuration = 0;
-    Vector3 rotationVector;
+    public bool IsRotating => this.StateController.CurrentState == this.rotateState;
 
     void Awake()
     {
@@ -36,8 +40,10 @@ namespace Unit
     protected override void Init()
     {
       base.Init();
-      this.AttackController = new AttackController(this.Stat);
-      this.rotationVector = new Vector3(0, this.Stat.RotationSpeed, 0);
+      this.AttackController = new RangeAttackController(
+        stat: this.Stat,
+        projectileData: this.projectileData,
+        firePoint: this.attackPoint);
     }
 
     // Start is called before the first frame update
@@ -47,21 +53,23 @@ namespace Unit
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+      base.Update();
       if (this.IsActive) {
-        if (this.stopRotatingDuration <= 0) {
+        this.AttackController.Update();
+        if (this.IsRotating) {
           this.Rotate();
-        }
-        else {
-          this.stopRotatingDuration -= Time.deltaTime;
         }
       }
     }
 
     void Rotate()
     {
-      this.transform.Rotate(this.rotationVector);
+      this.transform.Rotate(new Vector3(
+          0, this.Stat.RotationSpeed * Time.deltaTime, 0
+          )
+        );
     }
 
     public void Attack(BaseDamagable damagable)

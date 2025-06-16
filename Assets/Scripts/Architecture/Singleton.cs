@@ -7,7 +7,7 @@ namespace Architecture
      static T Shared { get; private set; } 
   }
 
-  public abstract class Singleton<T> where T: class, new()
+  public abstract class Singleton<T>: ISingleton<T> where T: class, new()
   {
     static T instance;
     public static T Shared 
@@ -22,7 +22,7 @@ namespace Architecture
     }
   }
 
-  public class SingletonBehaviour<T>: _MonoBehaviour where T: MonoBehaviour, ISingleton<T>
+  public class SingletonBehaviour<T>: _MonoBehaviour where T: _MonoBehaviour
   {
     static T instance;
 
@@ -43,7 +43,7 @@ namespace Architecture
       return (gameObject.AddComponent<T>());
     }
 
-    protected void OnAwake()
+    protected virtual void Awake()
     {
       if (SingletonBehaviour<T>.instance == null) {
         SingletonBehaviour<T>.instance = this as T;

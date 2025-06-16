@@ -33,15 +33,13 @@ namespace Unit
         out RaycastHit hitInfo,
         unit.Stat.LookRange)
         ) {
-        //FIXME: remove GetComponent 
         var hitLayer = (1 << hitInfo.collider.gameObject.layer);
         if ((hitLayer & this.targetLayer.value) == 0) {
           return (false);
         }
-        var damagable = hitInfo.collider.GetComponent<BaseDamagable>();
+        var damagable = UnitManager.Shared.GetDamagableFrom(hitInfo.collider.gameObject);
         if (damagable != null) {
-          var chasable = (IChasable)unit;
-          if (chasable != null) {
+          if (unit is IChasable chasable) {
             chasable.ChaseTarget = damagable;
           }
           return (true);

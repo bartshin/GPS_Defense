@@ -10,6 +10,7 @@ public class BaseDamagable : MonoBehaviour, IDamagable
   public int LastDamage { get; private set; }
   public Transform LastAttacker { get; private set; }
   public bool IsAlive => this.Hp.Value.current > 0;
+  public Vector3 Position => this.transform.position;
   public Action OnDamaged;
 
   [Button ("Set max hp")]

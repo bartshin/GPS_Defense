@@ -44,5 +44,20 @@ namespace Unit
         this.Damagable.SetMaxHp(this.Stat.Hp);
       }
     }
+
+    protected virtual void Update()
+    {
+      if (this.IsActive) {
+        this.StateController.Update();
+        if (this.StateController.IsAbleToAct) {
+          this.StateController.CurrentState.PerformAction(this);
+          this.StateController.ResetActionDelay();
+        }
+        if (this.StateController.IsAbleToTransition) {
+          this.StateController.CurrentState.UpdateTransition(this);  
+          this.StateController.ResetTransitionDeley();
+        }
+      }
+    }
   }
 }

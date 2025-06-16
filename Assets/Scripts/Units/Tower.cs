@@ -5,23 +5,26 @@ namespace Unit
 {
   public class Tower : BaseUnit, IAttackAble
   {
+    Transform Muzzle; 
     [SerializeField] [Required(InfoMessageType.Error)]
-    Transform attackPoint; 
-    [SerializeField] [Required(InfoMessageType.Error)]
-    ProjectileData projectileData;
+    public ProjectileStat ProjectileData;
     [ShowInInspector]
     public AttackController AttackController { get; private set; }
+    Animator Animator;
     public bool IsAttackable => this.AttackController.IsAttackable;
-    public Vector3 AttackPosition => this.attackPoint.position;
-    public Vector3 AttackDirection => this.attackPoint.forward;
+    public Vector3 AttackPosition => this.Muzzle.position;
+    public Vector3 AttackDirection => this.Muzzle.forward;
     public bool IsRotating => this.StateController.CurrentState == StateController.ROTATE_STATE;
     public bool IsFocusing => this.StateController.CurrentState == StateController.FOCUS_ATTACK_STATE;
 
     public BaseDamagable Target { get; set; }
 
-    void Awake()
+    public void Attack(BaseDamagable damagable)
     {
-      this.Init();
+      this.AttackController.Attack(damagable);
+      if (this.Animator != null) {
+        this.Animator.SetTrigger("Attack");
+      }
     }
 
     [Button ("Activate")]
@@ -36,19 +39,26 @@ namespace Unit
       this.IsActive = false;
     }
 
-    protected override void Init()
+    public override void Init()
     {
       base.Init();
       this.AttackController = new RangeAttackController(
         stat: this.Stat,
-        projectileData: this.projectileData,
-        firePoint: this.attackPoint);
+        projectileData: this.ProjectileData,
+        firePoint: this.Muzzle);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+      if (this.Animator == null) {
+        this.Animator = this.GetComponent<Animator>();
+      }
+      if (this.Muzzle == null) {
+        this.Muzzle = Utils.RecursiveFindChild(this.transform, "Muzzle");
+      }
+      if (this.IsActive) {
+        this.Init();
+      }
     }
 
     // Update is called once per frame
@@ -61,7 +71,13 @@ namespace Unit
           this.Rotate();
         }
         else if (this.IsFocusing && this.Target != null) {
-          this.transform.LookAt(this.Target.transform);
+          this.transform.LookAt(
+            new Vector3(
+              this.Target.transform.position.x,
+              this.transform.position.y,
+              this.Target.transform.position.z
+              )
+            );
         }
       }
     }
@@ -72,11 +88,6 @@ namespace Unit
           0, this.Stat.RotationSpeed * Time.deltaTime, 0
           )
         );
-    }
-
-    public void Attack(BaseDamagable damagable)
-    {
-      this.AttackController.Attack(damagable);
     }
   }
 }

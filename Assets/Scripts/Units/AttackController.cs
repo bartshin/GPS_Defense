@@ -16,7 +16,7 @@ namespace Unit
 
     public virtual void Attack(BaseDamagable damagable)
     {
-      
+
     }
 
     public virtual void Update()

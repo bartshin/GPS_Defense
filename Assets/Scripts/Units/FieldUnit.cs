@@ -59,7 +59,9 @@ namespace Unit
 
     void Awake()
     {
-      this.Init();
+      if (this.IsActive) {
+        this.Init();
+      }
     }
 
     void OnEnable()
@@ -105,7 +107,7 @@ namespace Unit
     }
 
     [Button("Init")]
-    protected override void Init()
+    public override void Init()
     {
       base.Init();
       if (this.navMeshAgent == null) {

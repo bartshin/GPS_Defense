@@ -7,12 +7,12 @@ namespace Unit
     [SerializeField]
     public bool IsActive { get; protected set; }
     [SerializeField]
-    public Stat Stat { get; private set; }
+    public Stat Stat { get; set; }
     [SerializeField]
     public State DefaultState
     { 
       get => this.defaultState;
-      protected set {
+      set {
         this.defaultState = value;
         if (this.StateController != null) {
           this.StateController.TransitionTo(value);
@@ -34,11 +34,11 @@ namespace Unit
       }
     }
 
-    protected virtual void Init()
+    public virtual void Init()
     {
       this.StateController = new StateController(this.DefaultState);
       if (this.Damagable == null) {
-        this.Damagable = this.GetComponent<BaseDamagable>();
+        this.Damagable = this.gameObject.AddComponent<BaseDamagable>();
       }
       if (this.Damagable != null) {
         this.Damagable.SetMaxHp(this.Stat.Hp);

@@ -6,7 +6,7 @@ namespace Unit
   [CreateAssetMenu(menuName = "Data/Unit/Stat")]
   public class Stat : _ScriptableObject
   {
-    [BoxGroup("Prefab")] [PreviewField(75)] [AssetsOnly] [AssetSelector(Paths = "Assets/Prefabs/Units")]
+    [BoxGroup("Prefab")] [PreviewField(75)] [AssetsOnly] 
     public GameObject Prefab;
     [VerticalGroup("Basic")]
     public string Name;

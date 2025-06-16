@@ -7,12 +7,12 @@ namespace Unit
   [Serializable]
   public class RangeAttackController: AttackController
   {
-    ProjectileData projectileData;
+    ProjectileStat projectileData;
     Transform firePoint;
 
     public RangeAttackController(
       Stat stat,
-      ProjectileData projectileData,
+      ProjectileStat projectileData,
       Transform firePoint): base(stat)
     { 
       this.projectileData = projectileData;
@@ -32,8 +32,11 @@ namespace Unit
     BaseProjectile CreateProjectile()
     {
       var gameObject = GameObject.Instantiate(this.projectileData.Prefab);
+      gameObject.transform.position = this.firePoint.position;
       var projectile = gameObject.GetComponent<BaseProjectile>(); 
       projectile.Data = this.projectileData;
+      var pooledObject = gameObject.GetComponent<SimplePooledObject>();
+      pooledObject.LifeTime = this.projectileData.LifeTime;
       return (projectile);
     }
   }

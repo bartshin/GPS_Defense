@@ -4,9 +4,9 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [CreateAssetMenu (menuName = "Data/Projectile")]
-public class ProjectileData : _ScriptableObject
+public class ProjectileStat : _ScriptableObject
 {
-  [BoxGroup("Prefab")] [PreviewField(75)] [AssetsOnly] [AssetSelector(Paths = "Assets/Prefabs/Projectiles")]
+  [BoxGroup("Prefab")] [PreviewField(75)] [AssetsOnly] 
   public GameObject Prefab;
   [SerializeField]
   public LayerMask TargetLayer;

@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 public class BaseProjectile : _MonoBehaviour, IProjectile
 {
 
-  public ProjectileData Data 
+  public ProjectileStat Data 
   { 
     get => this.data; 
     set {
@@ -14,7 +14,7 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
     }
   }
   [SerializeField]
-  ProjectileData data;
+  ProjectileStat data;
   public Action<BaseProjectile, Collider> OnHit;
   [SerializeField]
   virtual protected Vector3 direction { get; set; }
@@ -59,15 +59,21 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
   {
     this.projectileCollider = this.GetComponent<Collider>();
     this.remainingLifeTime = this.Data.LifeTime;
-    this.projectileCollider.includeLayers = (1 << this.Data.TargetLayer);
+    this.projectileCollider.includeLayers = (this.Data.TargetLayer.value);
+    this.projectileCollider.excludeLayers = ~(this.Data.TargetLayer.value);
+    Debug.Log(this.data.TargetLayer.value);
     this.Speed = this.Data.Speed;
   }
 
   private void SetDirection()
   {
     var targetPosition = this.target.transform.position;
-    this.direction = (targetPosition - this.transform.position).normalized;
-    this.transform.LookAt(targetPosition);
+    this.direction = new Vector3(
+      targetPosition.x - this.transform.position.x,
+      0,
+      (targetPosition.z - this.transform.position.z)
+      ).normalized;
+    this.transform.forward = this.direction;
   }
 
   protected virtual void OnTriggerEnter(Collider collider)

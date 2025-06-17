@@ -16,7 +16,7 @@ public class MonsterFactory : MonoBehaviour
   int numberOfWayPoints;
   [SerializeField]
   int numberOfMonstersInPool;
-  Dictionary<MonsterResource, MonoBehaviourPool<FieldUnit>> monsterPools;
+  Dictionary<GameObject , MonoBehaviourPool<FieldUnit>> monsterPools;
   [ShowInInspector]
   (float min, float max) enemySpawnRange;
   float GetRandomPercentage() => (float)this.rand.Next(0, 100) / 100f;
@@ -25,7 +25,9 @@ public class MonsterFactory : MonoBehaviour
   {
     this.monsterPools = new ();
     foreach (var monsterResource in this.monsterResources) {
-      this.monsterPools.Add(monsterResource, this.CreatePool(monsterResource));
+      if (!this.monsterPools.ContainsKey(monsterResource.Prefab)) {
+        this.monsterPools.Add(monsterResource.Prefab, this.CreatePool(monsterResource));
+      }
     }
   }
 
@@ -48,23 +50,14 @@ public class MonsterFactory : MonoBehaviour
   [Button ("Spawn monster")]
   void SpawnMonster(MonsterResource monsterResource, Vector3 position)
   {
-    var pool = this.monsterPools[monsterResource];
+    var pool = this.monsterPools[monsterResource.Prefab];
     var monster = pool.Get();
-    monster.Reset();
+    monster.Stat = monsterResource.MonsterStat;
+    monster.DefaultState = monsterResource.DefaultState;
+    monster.ChaseTarget = this.AttackTarget;
     monster.transform.position = position;
+    monster.Reset();
     monster.Activate();
-  }
-
-  FieldUnit CreateMonster(MonsterResource monsterResource)
-  {
-    var gameObject = Instantiate(monsterResource.Prefab);
-    var unit = gameObject.GetComponent<FieldUnit>();
-    unit.Stat = monsterResource.MonsterStat;
-    unit.DefaultState = monsterResource.DefaultState;
-    unit.ChaseTarget = this.AttackTarget;
-    unit.Init();
-    this.SetWayPoints(unit);
-    return (unit);
   }
 
   void SetWayPoints(FieldUnit unit)

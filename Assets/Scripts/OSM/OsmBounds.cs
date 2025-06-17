@@ -1,8 +1,10 @@
+using System;
 using System.Xml;
 using UnityEngine;
 
 namespace OSM
 {
+  [Serializable]
   public struct OsmBounds
   {
     [SerializeField]

@@ -18,28 +18,41 @@ namespace Unit
     { 
       this.projectileStat = projectileStat;
       this.firePoint = firePoint;
+      ProjectilePool.Shared.SetProjectile(projectileStat);
     }
 
     [Button ("Attack")]
     public override void Attack(BaseDamagable damagable)
     {
       this.remainingDelay = this.Stat.AttackDelay;
-      var projectile = this.CreateProjectile();
+      if (this.projectileStat.FireSound != null) {
+        AudioManager.Shared.PlaySfx(
+          this.projectileStat.FireSound, this.attacker.position);
+      }
+      var projectile = ProjectilePool.Shared.GetProjectile(this.projectileStat);
+      this.InitProjectile(projectile);
+      if (this.projectileStat.ExplosionSound != null) {
+        projectile.OnHit = this.PlayExplosionSound;
+      }
+      else {
+        projectile.OnHit = null;
+      }
       projectile.Target = damagable;
-      projectile.gameObject.SetActive(true);
     }
 
-    BaseProjectile CreateProjectile()
+    void PlayExplosionSound(BaseProjectile projectile, Collider collider)
     {
-      var gameObject = GameObject.Instantiate(this.projectileStat.Prefab);
-      gameObject.transform.position = this.firePoint.position;
-      var projectile = gameObject.GetComponent<BaseProjectile>(); 
+      AudioManager.Shared.PlaySfx(
+        this.projectileStat.ExplosionSound, projectile.transform.position
+        );
+    }
+
+    void InitProjectile(BaseProjectile projectile)
+    {
+      projectile.transform.position = this.firePoint.position;
       projectile.Data = this.projectileStat;
-      var pooledObject = gameObject.GetComponent<SimplePooledObject>();
-      pooledObject.LifeTime = this.projectileStat.LifeTime;
-      projectile.FiredUnit = this.firePoint.gameObject;
+      projectile.FiredUnit = this.attacker.gameObject;
       projectile.Damage = this.Stat.AttackDamage;
-      return (projectile);
     }
   }
 }

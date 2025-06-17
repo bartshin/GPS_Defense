@@ -1,6 +1,5 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
-using UnityEditor;
 using OSM;
 using Sirenix.OdinInspector;
 
@@ -16,9 +15,9 @@ public class MapConstructor : MonoBehaviour
   RoadContainer roadContainer; 
   [SerializeField] [Required(InfoMessageType.Error)]
   BuildingContainer buildingContainer;
+  int constructingCountAtOcne = 40;
   [SerializeField]
   Vector3 center;
-
 
   void OnEnable()
   {
@@ -49,7 +48,13 @@ public class MapConstructor : MonoBehaviour
   [Button("Construct map")]
   void ConstructMap()
   {
+    this.StartCoroutine(this.MapConstructRoutine());
+  }
+
+  IEnumerator MapConstructRoutine()
+  {
     foreach (var way in this.mapReader.Ways) {
+      int count = 0;
       if (way.Highway != OsmWay.HighwayType.None &&
         way.Nodes.Count > 1) {
         this.ConstructRoad(way);
@@ -57,26 +62,23 @@ public class MapConstructor : MonoBehaviour
       else if (way.Building != null && way.Nodes.Count > 1) {
         this.ConstructBuilding(way);
       }
+      if (count++ % this.constructingCountAtOcne  == 0) {
+        yield return (null);
+      }
     }
     Vector2 mapSize = this.mapReader.Bounds.CalcRange(); 
     this.roadContainer.SetFloorSize(mapSize);
+    yield return (null);
+    this.roadContainer.CreateNavMesh();
+    GameManager.Shared.OnFinishLoading();
   }
+  
 
   [Button("Construct road")]
   void ConstructRoad(OsmWay roadBoundary)
   {
     var road = this.roadConstructor.Construct(roadBoundary, this.center); 
     this.roadContainer.AddRoad(road);
-  }
-
-  void DrawVertices(List<Vector3> vertices)
-  {
-    float radius = 0.2f;
-    for (int i = 0; i < vertices.Count; i++) {
-      Handles.SphereHandleCap(
-        0, vertices[i], Quaternion.identity, radius, EventType.Repaint
-        );
-    }
   }
 
   [Button("Construct building from way")]

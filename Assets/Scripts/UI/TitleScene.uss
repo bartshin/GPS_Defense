@@ -1,0 +1,49 @@
+#title-scene-container {
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  background-image: url("project://database/Assets/Imports/Sprites/title_scene_background.jpg");
+}
+
+#titleLabel {
+  margin-bottom: 5%;
+  color: white;
+  -unity-font-definition: url("project://database/Assets/Imports/Fonts/NotoSansKR-Regular.ttf");
+  font-size: 40px;
+}
+
+Button {
+  width: 180px;
+  height: 60px;
+  background-color: transparent;
+  border-width: 1px;
+  transition: 1s ease-in-out;
+  margin-bottom: 30px;
+}
+
+#startButton {
+  border-color: #91C9FF;
+  margin-bottom: 10%;
+}
+
+#endButton {
+  border-color: #FF6363;
+}
+
+Button:hover {
+  transition: 1s ease-in-out;
+}
+
+#startButton:hover {
+  background-color: #4F95DA;
+}
+
+#endButton:hover {
+  background-color: #CF0F47;
+}
+
+Button Label {
+  color: white;
+  font-size: 18px;
+}

@@ -13,9 +13,9 @@ namespace Unit
     public float Speed;
     [BoxGroup("Movement")] [Range(0f, 30f)]
     public float Acceleration;
-    [BoxGroup("Movement")] [Range(0f, 5f)]
+    [BoxGroup("Movement")] [Range(0f, 10f)]
     public float StoppingDistance;
-    [BoxGroup("Movement")] [Range(10f, 90f)]
+    [BoxGroup("Movement")] [Range(10f, 180f)]
     public float RotationSpeed;
 
     [BoxGroup("Decision")] [Range(0.1f, 1f)]

@@ -44,7 +44,7 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: MonsterDamagedTrigger
+      Data: DamagedTrigger
     - Name: $v
       Entry: 7
       Data: 2|Unit.Event, Assembly-CSharp

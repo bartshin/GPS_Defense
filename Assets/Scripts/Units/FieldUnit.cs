@@ -24,6 +24,7 @@ namespace Unit
     [HideInInspector]
     public int nextWayPoint;
     public BaseDamagable ChaseTarget { get; set; }
+    public Rigidbody Rigidbody => this.rb;
     [ShowInInspector]
     public AttackController AttackController;
     [HideInInspector]
@@ -115,7 +116,11 @@ namespace Unit
 
     Transform GetEyeTransform()
     {
-      return (Utils.RecursiveFindChild(this.transform, "Eye"));
+      var eye = (Utils.RecursiveFindChild(this.transform, "Eye"));
+      if (eye != null) {
+        return (eye);
+      }
+      return (this.transform);
     }
 
     [Button("Set waypoints")]
@@ -163,7 +168,6 @@ namespace Unit
         this.animator.SetTrigger("Hit");
       }
       else {
-        Debug.Log("die");
         this.StartCoroutine(this.DieRoutine());
       }
     }

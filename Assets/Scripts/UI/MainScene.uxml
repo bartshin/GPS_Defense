@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scripts/TankSceneStyle.uss?fileID=7433441132597879392&amp;guid=44cf6c25d64a3588fbcc7250b1f1c6ea&amp;type=3#TankSceneStyle" />
+    <Style src="project://database/Assets/Scripts/Joystick.uss?fileID=7433441132597879392&amp;guid=585f60411c7ccf931a831595440547db&amp;type=3#Joystick" />
+</ui:UXML>

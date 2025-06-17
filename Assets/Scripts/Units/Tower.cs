@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
@@ -5,9 +6,11 @@ namespace Unit
 {
   public class Tower : BaseUnit, IAttackAble
   {
+    static WaitForSeconds WAIT_DESTROY = new WaitForSeconds(1.5f);
     Transform Muzzle; 
     [SerializeField] [Required(InfoMessageType.Error)]
     public ProjectileStat ProjectileStat;
+    public GameObject DestroyEffect;
     [ShowInInspector]
     public AttackController AttackController { get; private set; }
     Animator Animator;
@@ -70,6 +73,17 @@ namespace Unit
       }
     }
 
+    void OnEnable()
+    {
+      this.Damagable.OnDamaged += this.OnDamaged;
+    }
+
+    protected override void OnDisable()
+    {
+      base.OnDisable();
+      this.Damagable.OnDamaged -= this.OnDamaged;
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -89,6 +103,35 @@ namespace Unit
             );
         }
       }
+    }
+
+    void OnDamaged()
+    {
+      if (this.StateController.CurrentState.Events != null &&
+        this.StateController.CurrentState.Events.TryGetValue(
+          nameof(DamagedTrigger),
+          out Event unitEvent
+          )) {
+        unitEvent.OnEventOccur(this);
+      }
+      if (this.Damagable.Hp.Value.current <= 0) {
+        this.StartCoroutine(this.DestroyRoutine());
+      }
+    }
+
+    IEnumerator DestroyRoutine()
+    {
+      GameObject effect = null;
+      if (this.DestroyEffect != null) {
+        effect = Instantiate(this.DestroyEffect);
+        effect.transform.position = this.transform.position;
+      }
+      this.gameObject.SetActive(false);
+      yield return (WAIT_DESTROY);
+      if (effect != null) {
+        Destroy(effect);
+      }
+      Destroy(this.gameObject);
     }
 
     void Rotate()

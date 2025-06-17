@@ -27,7 +27,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: Events
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[MonsterEvent,
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Unit.Event,
         Assembly-CSharp]], mscorlib
     - Name: comparer
       Entry: 7
@@ -44,10 +44,10 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: MonsterDamagedTrigger
+      Data: DamagedTrigger
     - Name: $v
       Entry: 7
-      Data: 2|MonsterEvent, Assembly-CSharp
+      Data: 2|Unit.Event, Assembly-CSharp
     - Name: trigger
       Entry: 10
       Data: 0

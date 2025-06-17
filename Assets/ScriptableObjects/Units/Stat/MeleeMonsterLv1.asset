@@ -22,13 +22,13 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   Hp: 100
-  Speed: 5
-  Acceleration: 3
-  StoppingDistance: 3
+  Speed: 4
+  Acceleration: 2
+  StoppingDistance: 5
   RotationSpeed: 80
   LookSpehreCastRadius: 0.2
   LookRange: 10
   IsMeleeMonster: 1
   AttackDamage: 5
-  AttackRange: 2
+  AttackRange: 5
   AttackDelay: 0.5

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.IO;
 using System.Xml;
 using System.Collections.Generic;
@@ -16,8 +17,6 @@ public class MapReader : _MonoBehaviour
   public List<OsmWay> Ways { get; private set; }
   public Action OnFinishRead;
 
-  [SerializeField] [FilePath(AbsolutePath = true, ParentFolder = "Assets/Data", Extensions = "xml")]
-  string dataPath;
   [SerializeField]
   (float min, float max) latitudeRange
   {
@@ -46,6 +45,11 @@ public class MapReader : _MonoBehaviour
 
   [SerializeField]
   bool drawWays;
+
+  void Start()
+  {
+    this.ReadDataFile();
+  }
   
   [Button("Clear data")]
   void ClearData()
@@ -63,7 +67,13 @@ public class MapReader : _MonoBehaviour
     if (this.Ways == null) {
       this.Ways = new();
     }
-    var data = File.ReadAllText(this.dataPath);
+    var metadata = File.ReadAllText(GameManager.Shared.SelectedMetadataPath);
+    Debug.Log(metadata);
+    XmlDocument metaDoc = new XmlDocument();
+    metaDoc.LoadXml(metadata);
+    var boundsNode = metaDoc.SelectNodes("/metadata/bounds")[0];
+    this.Bounds = new OsmBounds(boundsNode);
+    var data = File.ReadAllText(GameManager.Shared.SelectedMapPath);
     XmlDocument xmlDoc = new XmlDocument();
     xmlDoc.LoadXml(data);
     this.GetNodes(xmlDoc.SelectNodes("/osm/node"));

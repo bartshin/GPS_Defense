@@ -22,6 +22,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   Prefab: {fileID: 5912344974454636654, guid: d1a7b051f84d32435821aa829534a20d, type: 3}
+  FireSound: {fileID: 8300000, guid: c161179b3403167a18f8c4d6a9cbb7c1, type: 3}
+  ExplosionSound: {fileID: 8300000, guid: 2c1828e622dc4a03b99be3adc534de04, type: 3}
   TargetLayer:
     serializedVersion: 2
     m_Bits: 512

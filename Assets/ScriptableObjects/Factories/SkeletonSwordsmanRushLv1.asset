@@ -24,4 +24,4 @@ MonoBehaviour:
   Prefab: {fileID: 4389056476029205342, guid: 8af1361300d2970978a5b0c514fc4e2c, type: 3}
   MonsterStat: {fileID: 11400000, guid: e27ff832033967e1f87b63a5e13a90d3, type: 2}
   DefaultState: {fileID: 11400000, guid: 055cb7e0a5fd16d1ebbd2d43b00e70d5, type: 2}
-  SpawnChance: 0.3
+  SpawnChance: 0.2

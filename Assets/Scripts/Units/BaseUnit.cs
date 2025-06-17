@@ -1,6 +1,7 @@
 using UnityEngine;
 using Architecture;
 using System;
+using Sirenix.OdinInspector;
 
 namespace Unit
 {
@@ -25,6 +26,7 @@ namespace Unit
     }
     State defaultState;
     public BaseDamagable Damagable { get; protected set; }
+    [ShowInInspector]
     public StateController StateController { get; protected set; }
     public Action<IPooledObject> OnDisabled { get; set; }
 

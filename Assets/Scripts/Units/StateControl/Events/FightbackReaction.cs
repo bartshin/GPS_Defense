@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Unit
@@ -12,23 +10,25 @@ namespace Unit
 
     public override bool React(BaseUnit unit)
     {
-      var chasable = (IChasable)unit;
-      if (unit.Damagable.Hp.Value.current > this.hpThreshold) {
-        if (chasable.ChaseTarget != null) {
-          return (true);
-        }
-        else {
-          var attacker = unit.Damagable.LastAttacker.GetComponent<BaseDamagable>();
-          if (attacker != null) {
-            chasable.ChaseTarget = attacker;
-            return (true);
+      bool isFightback = false;
+      if (unit is IAttackAble attackAble) {
+        if (unit.Damagable.Hp.Value.current > this.hpThreshold) {
+          if (attackAble.Target != null) {
+            isFightback = true;
           }
           else {
-            return (false);
+            var attacker = unit.Damagable.LastAttacker.GetComponent<BaseDamagable>();
+            if (attacker != null) {
+              attackAble.Target = attacker;
+              isFightback = true;
+            }
+          }
+          if (isFightback && attackAble.Target != null) {
+            unit.transform.LookAt(attackAble.Target.transform);
           }
         }
       }
-      return (false);
+      return (isFightback);
     }
   }
 

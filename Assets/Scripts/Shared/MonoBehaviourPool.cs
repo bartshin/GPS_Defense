@@ -34,7 +34,7 @@ public class MonoBehaviourPool<T>: ObjectPool<T> where T: MonoBehaviour, IPooled
     return (monoBehaviour);
   }
 
-  protected override void OnTakeFromPool(T obj) 
+  protected override void OnTakeFromPool(T obj)
   {
     obj.gameObject.SetActive(true);
   }

@@ -12,8 +12,8 @@ namespace Unit
 
     public override void Act(BaseUnit unit)
     {
-     #if UNITY_EDITOR
       var attackable = (IAttackAble)unit;
+     #if UNITY_EDITOR
       Debug.DrawRay(
         start: new Vector3(
           attackable.AttackPosition.x,

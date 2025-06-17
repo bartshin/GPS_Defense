@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Architecture;
 
-public class BaseProjectile : _MonoBehaviour, IProjectile
+public class BaseProjectile : _MonoBehaviour, IProjectile, IPooledObject
 {
 
   public ProjectileStat Data 
@@ -31,6 +32,9 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
   }
 
   IDamagable IProjectile.Target => (IDamagable)this.target;
+
+  public Action<IPooledObject> OnDisabled { get; set; }
+
   protected BaseDamagable target;
   protected float remainingLifeTime; 
   public GameObject FiredUnit;
@@ -38,6 +42,11 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
 
   public int CalcDamage() {
     return (this.Damage);
+  }
+
+  protected virtual void Awake()
+  {
+    this.projectileCollider = this.GetComponent<Collider>();
   }
 
   protected virtual void Update()
@@ -51,11 +60,16 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
 
   protected virtual void OnEnable()
   {
+    if (this.Data == null) {
+      this.remainingLifeTime = 2f;
+    }
+    else {
+      this.remainingLifeTime = this.Data.LifeTime;
+    }
   }
 
   void OnDataChanged()
   {
-    this.projectileCollider = this.GetComponent<Collider>();
     this.remainingLifeTime = this.Data.LifeTime;
     this.projectileCollider.includeLayers = (this.Data.TargetLayer.value);
     this.projectileCollider.excludeLayers = ~(this.Data.TargetLayer.value);
@@ -100,6 +114,11 @@ public class BaseProjectile : _MonoBehaviour, IProjectile
   }
 
   protected virtual void DestroySelf() {
-    this.gameObject.SetActive(false);
+    if (this.OnDisabled != null) {
+      this.OnDisabled.Invoke(this);
+    }
+    else {
+      this.gameObject.SetActive(false);
+    }
   }
 }

@@ -1,0 +1,16 @@
+
+#loading-ui-container {
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  background-image: url("project://database/Assets/Imports/Sprites/loading_background.jpg");
+}
+
+#loading-label {
+
+  margin-bottom: 5%;
+  color: white;
+  -unity-font-definition: url("project://database/Assets/Imports/Fonts/NotoSansKR-Regular.ttf");
+  font-size: 40px;
+}

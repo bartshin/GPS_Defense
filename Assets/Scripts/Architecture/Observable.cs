@@ -8,15 +8,23 @@ namespace Architecture
     public T Value {
       get => this.innerValue;
       set {
-        if ((this.innerValue == null && value != null) ||
-            (this.innerValue != null && value == null) ||
-              !this.innerValue.Equals(value)) {
-          if (this.WillChange != null && this.innerValue != null) {
-            this.WillChange(this.innerValue);
+        if (value == null) {
+          if (this.innerValue == null) {
+            return;
           }
-          this.innerValue = value;
-          if (this.OnChanged != null) {
-            this.OnChanged.Invoke(value);
+          else {
+            this.innerValue = default(T);
+            this.OnChanged?.Invoke(this.innerValue);
+          }
+        }
+        else {
+          if (this.innerValue == null) {
+            this.innerValue = value;
+            this.OnChanged?.Invoke(this.innerValue);
+          }
+          else if (!this.innerValue.Equals(value)) {
+            this.innerValue = value;
+            this.OnChanged?.Invoke(this.innerValue);
           }
         }
       }
@@ -35,7 +43,6 @@ namespace Architecture
     }
 
     public Action<T> OnChanged;
-    public Action<T> WillChange;
     public Action OnDestory;
 
     [SerializeField]

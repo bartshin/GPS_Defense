@@ -509,7 +509,7 @@ MonoBehaviour:
     m_Bits: 2048
   TowerResources:
   - {fileID: 11400000, guid: e1d31ea0a97aa7dbbb22f29725a76fcc, type: 2}
-  SelectedPowerIndex: 0
+  towerTobuild: {fileID: 0}
 --- !u!4 &382706030
 Transform:
   m_ObjectHideFlags: 0
@@ -1407,8 +1407,10 @@ MonoBehaviour:
     SerializationNodes: []
   LookTarget: {fileID: 1460874617}
   FollowTarget: {fileID: 1786264846}
-  postionOffset: {x: 0, y: 130, z: -80}
-  lookOffset: {x: 0, y: 20, z: 0}
+  postionOffset: {x: 0, y: 50, z: -40}
+  lookOffset: {x: 0, y: 10, z: 0}
+  CameraSpeed: 10
+  ZoomSpeed: 50
 --- !u!1 &2076917369
 GameObject:
   m_ObjectHideFlags: 0

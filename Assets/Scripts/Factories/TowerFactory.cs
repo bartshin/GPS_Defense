@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Unit;
+using Architecture;
 
 public class TowerFactory : MonoBehaviour
 {
@@ -11,7 +12,14 @@ public class TowerFactory : MonoBehaviour
   int cameraRaycastLayer;
   [ShowInInspector]
   public List<TowerResource> TowerResources;
-  public int SelectedPowerIndex;
+  public TowerResource towerTobuild;
+  [ShowInInspector]
+  int towerPrice = 30;
+
+  public void OnSelectTower(TowerResource tower)
+  {
+    this.towerTobuild = tower;
+  }
 
   void Awake()
   {
@@ -30,13 +38,18 @@ public class TowerFactory : MonoBehaviour
 
   void OnCursorPressed(Vector2 position)
   {
-    if (!GameManager.Shared.IsBuldingTower) {
+    if (this.towerTobuild == null) {
       return;
     }
+    var currentGold = GameManager.Shared.Gold.Value;
+    if (GameManager.Shared.Gold.Value < this.towerPrice) {
+      return;
+    }
+    GameManager.Shared.Gold.Value = currentGold - this.towerPrice;
     var hitPosition = this.CameraRaycast(position);
     if (hitPosition != null) {
       var tower = this.CreateTower(
-        this.TowerResources[0],
+        this.towerTobuild,
         hitPosition.Value
         );
       tower.Activate();

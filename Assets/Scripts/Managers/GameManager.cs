@@ -16,12 +16,12 @@ public class GameManager : SingletonBehaviour<GameManager>
   public ObservableValue<GameState> State { get; private set; }
   [SerializeField] [Required(InfoMessageType.Error)]
   LoadingUI loadingUI;
-  [SerializeField]
-  int mainBuldingStartHp = 1000;
   public string SelectedMapPath { get; private set; }
   public string SelectedMetadataPath { get; private set; }
-  public bool IsBuldingTower { get; private set; } 
   public MainBuilding MainBuilding;
+  public MainSceneUI MainSceneUI;
+  public ObservableValue<int> Gold { get; set; }
+  public Vector2 JoysticValue => this.MainSceneUI != null ? this.MainSceneUI.JoystickInput: Vector2.zero;
 
   [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
   new public static void CreateInstance()  
@@ -34,7 +34,7 @@ public class GameManager : SingletonBehaviour<GameManager>
   protected override void Awake()
   {
     base.Awake();
-    this.IsBuldingTower = false;
+    this.Gold = new (500);
     this.State = new (GameState.BeforeStart);
     this.SelectedMapPath = Application.dataPath + "/Data/map/gyungil.xml";
     this.SelectedMetadataPath = Application.dataPath + "/Data/meta/gyungil.xml";
@@ -42,6 +42,15 @@ public class GameManager : SingletonBehaviour<GameManager>
 
   public void GameOver()
   {
+    SceneManager.LoadScene("GameOverScene");
+  }
+
+  public void Restart()
+  {
+    this.MainSceneUI = null;
+    this.State.Value = GameState.BeforeStart;
+    this.Gold.Value = 500;
+    SceneManager.LoadScene("TitleScene");
   }
 
   public void OnClickStart()
@@ -63,6 +72,10 @@ public class GameManager : SingletonBehaviour<GameManager>
         monsterFactory.EnemySpawnRange = (20, 50);
         monsterFactory.StartSpawn();
         continue;
+      }
+      var towerFactory = factory.GetComponent<TowerFactory>();
+      if (towerFactory != null) {
+        this.MainSceneUI.SelectedTower.OnChanged += towerFactory.OnSelectTower;
       }
     }
     CameraManager.Shared.Focus(this.MainBuilding.transform);

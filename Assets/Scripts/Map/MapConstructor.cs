@@ -61,24 +61,24 @@ public class MapConstructor : MonoBehaviour
 
   IEnumerator MapConstructRoutine()
   {
-    var mainBuilding = this.ConstructMainBuilding();
-    GameManager.Shared.MainBuilding = mainBuilding;
-    yield return (null);
-    Vector2 mapSize = this.mapReader.Bounds.CalcRange(); 
-    this.roadContainer.SetFloorSize(mapSize * 0.3f);
-    foreach (var way in this.mapReader.Ways) {
-      int count = 0;
-      if (way.Highway != OsmWay.HighwayType.None &&
-        way.Nodes.Count > 1) {
-          this.ConstructRoad(way);
-      }
-      else if (way.Building != null && way.Nodes.Count > 1) {
-          this.ConstructBuilding(way);
-      }
-      if (count++ % this.constructingCountAtOcne  == 0) {
-        yield return (null);
-      }
-    }
+   var mainBuilding = this.ConstructMainBuilding();
+   GameManager.Shared.MainBuilding = mainBuilding;
+   yield return (null);
+   Vector2 mapSize = this.mapReader.Bounds.CalcRange(); 
+   this.roadContainer.SetFloorSize(mapSize * 0.3f);
+   foreach (var way in this.mapReader.Ways) {
+     int count = 0;
+     if (way.Highway != OsmWay.HighwayType.None &&
+       way.Nodes.Count > 1) {
+         this.ConstructRoad(way);
+     }
+     else if (way.Building != null && way.Nodes.Count > 1) {
+         this.ConstructBuilding(way);
+     }
+     if (count++ % this.constructingCountAtOcne  == 0) {
+       yield return (null);
+     }
+   }
     yield return (null);
     this.roadContainer.UpdateNavMesh();
     GameManager.Shared.OnFinishLoading();

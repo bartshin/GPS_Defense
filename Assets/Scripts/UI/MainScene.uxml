@@ -2,4 +2,6 @@
     <Style src="project://database/Assets/Scripts/UI/MainScene.uss?fileID=7433441132597879392&amp;guid=ca13f26e91cf1c0b1a52273ee3e2b124&amp;type=3#MainScene" />
     <Style src="project://database/Assets/Scripts/UI/Greeting.uss?fileID=7433441132597879392&amp;guid=f01420b0f05a632c6b6216a8f4d9b8d0&amp;type=3#Greeting" />
     <Style src="project://database/Assets/Scripts/UI/Loading.uss?fileID=7433441132597879392&amp;guid=3f5cb899cc650a674a93a12a866d4939&amp;type=3#Loading" />
+    <Style src="project://database/Assets/Scripts/UI/Joystick.uss?fileID=7433441132597879392&amp;guid=26dea3de4cd31fd74b4fb1d8218003d1&amp;type=3#Joystick" />
+    <Style src="project://database/Assets/Scripts/UI/PlayerHpView.uss?fileID=7433441132597879392&amp;guid=551d82c734cc4db59aba422d06ee1831&amp;type=3#PlayerHpView" />
 </ui:UXML>

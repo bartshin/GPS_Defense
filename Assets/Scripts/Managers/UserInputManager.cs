@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using Architecture;
 
 public class UserInputManager : SingletonBehaviour<UserInputManager>
@@ -88,11 +89,11 @@ public class UserInputManager : SingletonBehaviour<UserInputManager>
 
   void OnMainInteract()
   {
-    if (this.OnCursorPressed != null) {
+    if (this.OnCursorPressed != null && 
+      !EventSystem.current.IsPointerOverGameObject()) {
       var position = this.CursorPosition.Pull();
       this.OnCursorPressed.Invoke(position);
-    }
-    
+    }    
   }
 
   void OnDisable()

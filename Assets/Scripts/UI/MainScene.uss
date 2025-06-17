@@ -3,33 +3,54 @@
   height: 100%;
 }
 
-.fireButton {
+.tower-button {
   position: absolute;
-  right: 5%;
-  bottom: 5%;
   width: 100px;
   height: 100px;
   border-radius: 50%;
   padding: 30px;
-  border-width: 0;
-  background-color: #ffffff;
-  color: #ff5000;
+  border-width: 3px;
+  background-color: rgb(255, 255, 255);
   font-size: 16px;
 }
 
-.fireButton:hover {
-  color: #fff;
-  background-color: #ff5000;
-  transition: all .1s ease;
-  text-shadow: 2px 2px 4px #000000;
+#rotate-tower-button {
+  right: 5%;
+  bottom: 5%;
+  background-image: url("project://database/Assets/Imports/Sprites/rotate_tower_icon.jpg?fileID=21300000&guid=5d60f8ccc1ec02a12b83e2e1c0a7269c&type=3#rotate_tower_icon");
 }
 
-.scoreLabel {
+.tower-button-active {
+  transition: all 0.1s ease;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border-color: rgb(255, 80, 0);
+}
+
+#gold-label {
   position: absolute;
   right: 5%;
   top: 5%;
   font-size: 30px;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px #000000;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
 }
 
+#zoom-container {
+  position: absolute;
+  right: 5%;
+  top: 20%;
+  flex-direction: column; 
+  align-items: center;
+}
+
+.zoom-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 30px;
+  border-width: 3px;
+  background-color: rgb(255, 255, 255);
+  font-size: 26px;
+  color: blue;
+}

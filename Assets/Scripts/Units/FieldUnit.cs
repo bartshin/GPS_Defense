@@ -174,6 +174,7 @@ namespace Unit
 
     IEnumerator DieRoutine()
     {
+      GameManager.Shared.Gold.Value += 5;
       this.IsActive = false;
       this.animator.SetTrigger("Die");
       yield return (WAIT_FOR_DIE);

@@ -10,6 +10,7 @@ public class MainSceneUI: MonoBehaviour {
   public event Action OnFireButtonPressed;
   public event Action OnFireButtonReleased;
   public Vector2 JoystickInput => joystick.Input;
+  public GreetingUI greetingUI;
 
   VisualElement root;
   Label goldLabel; 
@@ -18,7 +19,29 @@ public class MainSceneUI: MonoBehaviour {
   void Awake() {
     this.root = this.GetComponent<UIDocument>().rootVisualElement;
     this.root.AddToClassList("container");
+    this.greetingUI = new GreetingUI();
+    this.root.Add(this.greetingUI);
+    this.greetingUI.Hide();
+    this.greetingUI.OnDismiss += this.OnGreetingDismiss;
+    this.CreateUI();
+    this.Hide();
   }
+
+  public void OnGreetingDismiss()
+  {
+    this.Show();
+    GameManager.Shared.StartGame();
+  }
+
+  public void Show() {      
+    this.root.visible = true;
+    this.root.BringToFront();
+  }  
+
+  public void Hide() {
+    this.root.visible = false;
+    this.root.SendToBack();   
+  }    
 
   void OnEnable() {
   }
@@ -28,7 +51,7 @@ public class MainSceneUI: MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
-    this.CreateUI();
+    this.greetingUI.Show();
   }
 
   void CreateUI() {
@@ -62,5 +85,4 @@ public class MainSceneUI: MonoBehaviour {
     this.joystick = new Joystick();
     this.root.Add(this.joystick);
   }
-
 }

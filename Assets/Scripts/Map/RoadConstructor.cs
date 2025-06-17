@@ -38,6 +38,8 @@ public class RoadConstructor : _MonoBehaviour
     var road = new GameObject(way.Name);
     var meshFilter = road.AddComponent<MeshFilter>();
     var meshRenderer = road.AddComponent<MeshRenderer>();
+    var collider = road.AddComponent<MeshCollider>();
+    collider.convex = true;
     var mesh = new Mesh();
     meshRenderer.material = this.material;
     var spline = this.splineContainer.AddSpline();

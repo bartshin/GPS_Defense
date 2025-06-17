@@ -1,0 +1,60 @@
+#greeting-ui-container {
+  width: 80%;
+  min-height: 80%;
+  margin: 5%;
+  margin-bottom: 10%;
+  border-color: white;
+  border-width: 4px;
+  border-radius: 20px;
+  background-color: black;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  color: white;
+  -unity-font-definition: url("project://database/Assets/Imports/Fonts/NotoSansKR-Regular.ttf");
+  font-size: 20px;
+  max-width: 50%;
+}
+
+.description {
+
+  color: white;
+  -unity-font-definition: url("project://database/Assets/Imports/Fonts/NotoSansKR-Regular.ttf");
+  font-size: 14px;
+}
+
+Button {
+  width: 180px;
+  height: 60px;
+  background-color: transparent;
+  border-width: 1px;
+  transition: 1s ease-in-out;
+  margin-bottom: 30px;
+}
+
+#dismiss-button {
+  border-color: #0B1D51;
+  background-color: #0B1D51;
+  border-radius: 20px;
+  border-width: 3px;
+  margin-bottom: 10%;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 50px
+}
+
+#dismiss-Button:hover {
+  background-color: white;
+  color: black;
+}
+
+#dismiss-button-label {
+  -unity-font-definition: url("project://database/Assets/Imports/Fonts/NotoSansKR-Regular.ttf");
+  font-size: 16px;
+}

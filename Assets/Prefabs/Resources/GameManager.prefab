@@ -195,7 +195,10 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: greetingUI
+      Entry: 6
+      Data: 
   loadingUI: {fileID: 3455046155590467414}
 --- !u!1 &6259286420556963865
 GameObject:
@@ -247,7 +250,7 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: e8d3063867c38855a89a05aba5f4f69b,
     type: 3}
-  m_SortingOrder: 3
+  m_SortingOrder: 10
 --- !u!114 &3455046155590467414
 MonoBehaviour:
   m_ObjectHideFlags: 0

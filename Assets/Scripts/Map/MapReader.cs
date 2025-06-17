@@ -68,7 +68,6 @@ public class MapReader : _MonoBehaviour
       this.Ways = new();
     }
     var metadata = File.ReadAllText(GameManager.Shared.SelectedMetadataPath);
-    Debug.Log(metadata);
     XmlDocument metaDoc = new XmlDocument();
     metaDoc.LoadXml(metadata);
     var boundsNode = metaDoc.SelectNodes("/metadata/bounds")[0];

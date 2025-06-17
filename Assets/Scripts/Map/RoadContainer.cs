@@ -45,8 +45,8 @@ public class RoadContainer : _MonoBehaviour
     this.roads.Add(road);
   }
 
-  [Button("Create NavMeshSurface")]
-  public void CreateNavMesh()
+  [Button("Update NavMeshSurface")]
+  public void UpdateNavMesh()
   {
     this.navMeshSurface.BuildNavMesh();
   }

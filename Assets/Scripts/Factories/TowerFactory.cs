@@ -30,6 +30,9 @@ public class TowerFactory : MonoBehaviour
 
   void OnCursorPressed(Vector2 position)
   {
+    if (!GameManager.Shared.IsBuldingTower) {
+      return;
+    }
     var hitPosition = this.CameraRaycast(position);
     if (hitPosition != null) {
       var tower = this.CreateTower(

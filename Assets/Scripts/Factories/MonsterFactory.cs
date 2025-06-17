@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Architecture;
 using Unit;
 
 public class MonsterFactory : MonoBehaviour
@@ -13,12 +12,16 @@ public class MonsterFactory : MonoBehaviour
   [SerializeField] [Required(InfoMessageType.Warning)]
   public BaseDamagable AttackTarget;
   [SerializeField]
+  public int SpawnCountAtOnce = 20;
+  [SerializeField]
   int numberOfWayPoints;
   [SerializeField]
   int numberOfMonstersInPool;
   Dictionary<GameObject , MonoBehaviourPool<FieldUnit>> monsterPools;
   [ShowInInspector]
-  (float min, float max) enemySpawnRange;
+  public (float min, float max) EnemySpawnRange;
+  WaitForSeconds SpawnDelay = new WaitForSeconds(0.5f);
+  Coroutine SpawnRoutine;
   float GetRandomPercentage() => (float)this.rand.Next(0, 100) / 100f;
 
   void Awake()
@@ -29,6 +32,28 @@ public class MonsterFactory : MonoBehaviour
         this.monsterPools.Add(monsterResource.Prefab, this.CreatePool(monsterResource));
       }
     }
+  }
+
+  public void StartSpawn()
+  {
+    if (this.SpawnRoutine != null) {
+      this.StopCoroutine(this.SpawnRoutine);
+    }
+    this.SpawnRoutine = this.StartCoroutine(
+      this.CreateSpawnRoutine()
+      );
+  }
+
+  IEnumerator CreateSpawnRoutine()
+  {
+    int count = 0;
+    while (count < 20) {
+      var resource = this.PickRandomMonster();
+      this.SpawnMonster(resource, this.GetRandomPosition(this.AttackTarget.Position));
+      count += 1;
+      yield return (this.SpawnDelay);
+    } 
+    this.SpawnRoutine = null;
   }
 
   MonoBehaviourPool<FieldUnit> CreatePool(MonsterResource resource)
@@ -82,10 +107,10 @@ public class MonsterFactory : MonoBehaviour
   Vector3 GetRandomPosition(Vector3 center)
   {
     var x = UnityEngine.Random.Range(
-      this.enemySpawnRange.min, this.enemySpawnRange.max);
+      this.EnemySpawnRange.min, this.EnemySpawnRange.max);
     var y = UnityEngine.Random.Range(0f, 0.5f);
     var z = UnityEngine.Random.Range(
-      this.enemySpawnRange.min, this.enemySpawnRange.max);
+      this.EnemySpawnRange.min, this.EnemySpawnRange.max);
     return (new Vector3(
       this.GetRandomSignedValue(x),
       this.GetRandomSignedValue(y), 

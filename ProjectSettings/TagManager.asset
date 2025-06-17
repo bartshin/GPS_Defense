@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Debug
+  - Map
+  - Factory
   layers:
   - Default
   - TransparentFX

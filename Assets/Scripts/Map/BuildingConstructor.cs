@@ -33,6 +33,8 @@ public class BuildingConstructor : _MonoBehaviour
     var gameObject = new GameObject(way.Name);
     var meshFilter = gameObject.AddComponent<MeshFilter>();
     var meshRenderer = gameObject.AddComponent<MeshRenderer>();
+    var collider = gameObject.AddComponent<MeshCollider>();
+    collider.convex = true;
     var mesh = new Mesh();
     var buildingCenter = way.CalcCenter();
     var isClockWise = this.IsClockWise(way.Nodes);
